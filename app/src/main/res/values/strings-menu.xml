@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_home">主页</string>
+    <string name="action_found">发现</string>
+    <string name="action_shop">商城</string>
+    <string name="action_personal">个人</string>
+</resources>
