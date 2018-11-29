@@ -24,12 +24,6 @@ public class MainActivity extends AppCompatActivity  {
     private ViewPagerAdapter viewPagerAdapter;
     private ViewPager viewPager;
     private MenuItem menuItem;
-    //声明AMapLocationClient类对象
-    public AMapLocationClient mLocationClient = null;
-    //声明定位回调监听器
-    public MyAMapLocationListener mLocationListener = new MyAMapLocationListener();
-    //声明AMapLocationClientOption对象
-    public AMapLocationClientOption mLocationOption = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
