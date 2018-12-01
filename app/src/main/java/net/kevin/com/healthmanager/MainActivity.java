@@ -1,5 +1,6 @@
 package net.kevin.com.healthmanager;
 
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
+import com.baidu.location.LocationClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +23,10 @@ public class MainActivity extends AppCompatActivity  {
     private ViewPagerAdapter viewPagerAdapter;
     private ViewPager viewPager;
     private MenuItem menuItem;
+
+    public LocationClient mLocationClient;
+
+    private TextView positionText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
