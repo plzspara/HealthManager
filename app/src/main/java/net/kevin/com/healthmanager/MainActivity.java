@@ -24,10 +24,6 @@ public class MainActivity extends AppCompatActivity  {
     private ViewPager viewPager;
     private MenuItem menuItem;
 
-    public LocationClient mLocationClient;
-
-    private TextView positionText;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

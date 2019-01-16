@@ -3,4 +3,25 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="tel">请输入电话号码注册</string>
+    <string name="register">注册</string>
+    <string name="confirm_vercode">确认验证码</string>
+    <string name="input_Verification">请输入验证码</string>
+    <string name="get_ver_code">获取</string>
+    <string name="todo">TODO</string>
+    <string name="account">请输入手机号</string>
+    <string name="password">密码</string>
+    <string name="go_register">没有帐号？去注册</string>
+    <string name="Login">登录</string>
+    <string name="QQLogin">QQ登录</string>
+    <string name="remember_password">记住密码</string>
+    <string name="auto_login">自动登录</string>
+    <string name="confirm_pass">确认密码</string>
+    <string name="phone">电话</string>
 </resources>
