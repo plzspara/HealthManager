@@ -1,4 +1,4 @@
-package net.kevin.com.healthmanager;
+package net.kevin.com.healthmanager.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import net.kevin.com.healthmanager.R;
+import net.kevin.com.healthmanager.javaBean.User;
+
 import cn.bmob.v3.Bmob;
-import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
@@ -39,7 +41,7 @@ public class PasswordActivity extends AppCompatActivity {
                         @Override
                         public void done(BmobException e) {
                             if (e == null) {
-                                Intent intent = new Intent(PasswordActivity.this,MainActivity.class);
+                                Intent intent = new Intent(PasswordActivity.this, MainActivity.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(),"密码出错"+ e.getErrorCode() + "-" +e.getMessage(),Toast.LENGTH_SHORT).show();

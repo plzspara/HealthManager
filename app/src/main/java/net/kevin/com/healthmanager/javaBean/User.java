@@ -1,4 +1,4 @@
-package net.kevin.com.healthmanager;
+package net.kevin.com.healthmanager.javaBean;
 
 import cn.bmob.v3.BmobUser;
 

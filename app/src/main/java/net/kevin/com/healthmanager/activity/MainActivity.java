@@ -1,17 +1,19 @@
-package net.kevin.com.healthmanager;
+package net.kevin.com.healthmanager.activity;
 
-import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import com.baidu.location.LocationClient;
+
+import net.kevin.com.healthmanager.R;
+import net.kevin.com.healthmanager.fragment.FirstFragment;
+import net.kevin.com.healthmanager.fragment.SecondFragment;
+import net.kevin.com.healthmanager.fragment.TestFragment;
+import net.kevin.com.healthmanager.adapter.ViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+        //BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         viewPager = (ViewPager) findViewById(R.id.vp);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -56,10 +58,12 @@ public class MainActivity extends AppCompatActivity  {
         });
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
+        FirstFragment firstFragment = new FirstFragment();
+        SecondFragment secondFragment = new SecondFragment();
         List<Fragment> list = new ArrayList<>();
-        list.add(TestFragment.newInstance("首页"));
-        list.add(TestFragment.newInstance("钱包"));
-        list.add(TestFragment.newInstance("卡片"));
+        list.add(firstFragment);
+        list.add(secondFragment);
+        list.add(TestFragment.newInstance("商城"));
         list.add(TestFragment.newInstance("个人"));
         viewPagerAdapter.setList(list);
     }

@@ -1,9 +1,7 @@
-package net.kevin.com.healthmanager;
+package net.kevin.com.healthmanager.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.kevin.com.healthmanager.R;
+import net.kevin.com.healthmanager.javaBean.User;
+
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobSMS;
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
@@ -134,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putBoolean("LoginStatus", true);
                                 editor.commit();
-                                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else {

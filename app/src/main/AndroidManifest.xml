@@ -8,19 +8,25 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
-    <!-- 允许联网 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 获取wifi网络状态的信息 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- 获取sd卡写的权限，用于文件上传和下载 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- 允许读取手机状态 用于创建BmobInstallation -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        tools:ignore="ProtectedPermissions" /> <!-- 允许联网 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取wifi网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 获取sd卡写的权限，用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许读取手机状态 用于创建BmobInstallation -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 计歩 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-feature android:name="android.hardware.sensor.accelerometer" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-feature
+        android:name="android.hardware.sensor.stepcounter"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.sensor.stepdetector"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -28,37 +34,52 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity.WeightActivity"></activity>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity android:name=".activity.StepActivity" />
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="xfaG6svKlFNomW9FUn58pGjapsp6qcqW" />
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.MainActivity" />
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=".remote" />
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".RegisterActivity" />
-
-        <activity android:name=".PasswordActivity"/>
-
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.PasswordActivity" />
+        <activity
+            android:name=".activity.StepActivity"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".activity.HistoryActivity" />
+        <activity android:name=".activity.SetPlanActivity" />
+        <activity android:name=".activity.WebActivity" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
-            android:noHistory="true"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent101530906" />
             </intent-filter>
         </activity>
@@ -67,9 +88,10 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="behind"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <provider
-            android:authorities="net.kevin.com.healthmanager.BmobContentProvider"
-            android:name="cn.bmob.v3.util.BmobContentProvider"></provider>
+            android:name="cn.bmob.v3.util.BmobContentProvider"
+            android:authorities="net.kevin.com.healthmanager.BmobContentProvider" />
     </application>
 
 </manifest>

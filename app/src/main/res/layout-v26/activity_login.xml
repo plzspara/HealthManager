@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:background="@drawable/bg_src_tianjin"
-    tools:context="net.kevin.com.healthmanager.LoginActivity">
+    tools:context="net.kevin.com.healthmanager.activity.LoginActivity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"

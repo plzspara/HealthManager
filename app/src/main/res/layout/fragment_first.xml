@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_src_morning"
+    tools:context="net.kevin.com.healthmanager.fragment.FirstFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <net.kevin.com.healthmanager.step.StepArcView
+        android:id="@+id/step"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:paddingTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="200dp" />
+
+    <Button
+        android:id="@+id/start_running"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="开始运动"
+        android:background="@color/yellow"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <Button
+        android:id="@+id/weight"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="体重"
+        android:background="@color/yellow"
+        />
+
+</LinearLayout>

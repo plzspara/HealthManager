@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tx_news_simple_photos_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="你没有看错!8天长假赴韩中国团体游客数量为0"
+            android:textColor="#696969"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:id="@+id/tx_news_simple_photos_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1小时前" />
+
+            <TextView
+                android:id="@+id/img_news_simple_photos_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="新闻集锦" />
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+        <ImageView
+            android:id="@+id/tx_news_simple_photos_01"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_launcher_background"
+            />
+
+    </RelativeLayout>
+</LinearLayout>
+
