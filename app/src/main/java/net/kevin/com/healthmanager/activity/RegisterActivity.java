@@ -130,10 +130,6 @@ public class RegisterActivity extends AppCompatActivity {
                         public void done(User user, BmobException e) {
                             if (e == null) {
                                 Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                                SharedPreferences sharedPreferences = getSharedPreferences("User", 0);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putBoolean("LoginStatus", true);
-                                editor.commit();
                                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();

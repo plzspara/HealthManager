@@ -40,29 +40,22 @@ public class LoginActivity extends AppCompatActivity {
     private TextView text_goRegister, text_QQLogin;
     private Tencent mTencent;
 
-    private final String AppID = "101530906";
+    private final String AppID = "101552135";
     private final String appKey = "57b639f8a7a4b768d7e7add7329bcf34";
-    private final String bing_url = "http://guolin.tech/api/bing_pic";
 
-    private String snsType = "qq",accessToken, expiresIn,userId;
-    private String openidString,url,nickName,gender;
-    private SharedPreferences SP;
+    private String snsType = "qq";
+    private String openidString, url, nickName, gender, province, city, year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        boolean loginStatus;
-        SP = getSharedPreferences("User",0);
-        loginStatus = SP.getBoolean("LoginStatus",false);
-        /*if (loginStatus) {
-            goMainActivity();
-        }*/
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        mTencent = Tencent.createInstance(AppID,getApplicationContext());
+        setContentView(R.layout.login);
+        mTencent = Tencent.createInstance(AppID, getApplicationContext());
         Bmob.initialize(this, appKey);
-
+        if (BmobUser.isLogin()) {
+            goMainActivity();
+        }
         button_login = (Button) findViewById(R.id.btn_submit);
         text_goRegister = (TextView) findViewById(R.id.txt_go_register);
         edit_account = (EditText) findViewById(R.id.edit_phone);
@@ -82,14 +75,10 @@ public class LoginActivity extends AppCompatActivity {
                         public void done(User user, BmobException e) {
                             if (user != null) {
                                 Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                                SP = getSharedPreferences("User",0);
-                                SharedPreferences.Editor editor = SP.edit();
-                                editor.putBoolean("LoginStatus",true);
-                                editor.commit();
                                 goMainActivity();
                             } else {
                                 Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
-                                Log.d(TAG, "loginByAccount.done: "+e.getMessage());
+                                Log.d(TAG, "loginByAccount.done: " + e.getMessage());
                             }
                         }
                     });
@@ -107,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         text_QQLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTencent.login(LoginActivity.this,"all",new BaseUiListener());
+                mTencent.login(LoginActivity.this, "all", new BaseUiListener());
             }
         });
 
@@ -117,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * 跳转到主活动
      */
-    private void goMainActivity(){
+    private void goMainActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -129,8 +118,8 @@ public class LoginActivity extends AppCompatActivity {
 
         Tencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener());
 
-        if(requestCode == Constants.REQUEST_API) {
-            if(resultCode == Constants.REQUEST_LOGIN) {
+        if (requestCode == Constants.REQUEST_API) {
+            if (resultCode == Constants.REQUEST_LOGIN) {
                 Tencent.handleResultData(data, new BaseUiListener());
             }
         }
@@ -140,75 +129,70 @@ public class LoginActivity extends AppCompatActivity {
     private class BaseUiListener implements IUiListener {
         public void onComplete(Object response) {
             // TODO Auto-generated method stub
-            try {
-                openidString = ((JSONObject) response).getString("openid");
-                accessToken =  ((JSONObject) response).getString("access_token");
-                expiresIn = ((JSONObject) response).getString("expires_in");
-                Log.d(TAG, "onComplete: "  + snsType + "-" + accessToken + "-" + expiresIn + "-" + openidString);
-                SP = getSharedPreferences("User",0);
-                SharedPreferences.Editor editor = SP.edit();
-                editor.putString("openid",openidString);
-                editor.putString("accessToken",accessToken);
-                editor.putString("expireIn",expiresIn);
-                editor.commit();
-                mTencent.setOpenId(openidString);
-                mTencent.setAccessToken(openidString,expiresIn);
+            Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
 
+
+            /*
+             * 下面隐藏的是用户登录成功后 登录用户数据的获取的方法
+             * 共分为两种  一种是简单的信息的获取,另一种是通过UserInfo类获取用户较为详细的信息
+             *有需要看看
+             * */
+            try {
+                //获得的数据是JSON格式的，获得你想获得的内容
+                //如果你不知道你能获得什么，看一下下面的LOG
+                Log.v("----TAG--", "-------------" + response.toString());
+                openidString = ((JSONObject) response).getString("openid");
+                mTencent.setOpenId(openidString);
+
+                mTencent.setAccessToken(((JSONObject) response).getString("access_token"), ((JSONObject) response).getString("expires_in"));
+
+                Log.v("TAG", "-------------" + openidString);
+                //access_token= ((JSONObject) response).getString("access_token");              //expires_in = ((JSONObject) response).getString("expires_in");
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
+
+            /**到此已经获得OpneID以及其他你想获得的内容了
+             QQ登录成功了，我们还想获取一些QQ的基本信息，比如昵称，头像什么的，这个时候怎么办？
+             sdk给我们提供了一个类UserInfo，这个类中封装了QQ用户的一些信息，我么可以通过这个类拿到这些信息
+             如何得到这个UserInfo类呢？  */
+
             QQToken qqToken = mTencent.getQQToken();
             UserInfo info = new UserInfo(getApplicationContext(), qqToken);
+            Log.d(TAG, "onComplete: " + qqToken);
+            //    info.getUserInfo(new BaseUIListener(this,"get_simple_userinfo"));
             info.getUserInfo(new IUiListener() {
                 @Override
                 public void onComplete(Object o) {
-                    try {
-                        Log.d(TAG, "onComplete: " + o.toString());
-                        url = ((JSONObject) o).getString("figureurl_qq");
-                        nickName = ((JSONObject) o).getString("nickname");
-                        gender = ((JSONObject) o).getString("gender");
-                        SP = getSharedPreferences("User",0);
-                        SharedPreferences.Editor editor = SP.edit();
-                        editor.putString("url",url);
-                        editor.putString("nickName",nickName);
-                        editor.putString("gender",gender);
-                        editor.commit();
-                        Log.d(TAG, "onComplete: ");
-                        BmobUser.BmobThirdUserAuth authInfo = new BmobUser.BmobThirdUserAuth(snsType,accessToken, expiresIn,openidString);
-                        BmobUser.loginWithAuthData(authInfo, new LogInListener<JSONObject>() {
+                    //用户信息获取到了
 
-                            @Override
-                            public void done(JSONObject userAuth,BmobException e) {
-                                Log.d(TAG, "done: ");
-                                Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                                SP = getSharedPreferences("User",0);
-                                SharedPreferences.Editor editor = SP.edit();
-                                editor.putBoolean("LoginStatus",true);
-                                editor.commit();
-                                goMainActivity();
-                            }
-                        });
-
-                    } catch (JSONException e) {
-                        // TODO Auto-generated catch block
-                        Log.d(TAG, "onComplete: " + e.getMessage());
-                        e.printStackTrace();
-                    }
+                    //Toast.makeText(getApplicationContext(), ((JSONObject) o).getString("nickname")+((JSONObject) o).getString("gender") , Toast.LENGTH_SHORT).show();
+                    Log.v("UserInfo", o.toString());
                 }
 
                 @Override
                 public void onError(UiError uiError) {
-                    Log.v("UserInfo","onError");
+                    Log.v("UserInfo", "onError");
                 }
 
                 @Override
                 public void onCancel() {
-                    Log.v("UserInfo","onCancel");
+                    Log.v("UserInfo", "onCancel");
                 }
             });
-
+            BmobUser.BmobThirdUserAuth authInfo = new BmobUser.BmobThirdUserAuth(snsType, mTencent.getAccessToken(), mTencent.getExpiresIn()+"", openidString);
+            BmobUser.loginWithAuthData(authInfo, new LogInListener<JSONObject>() {
+                @Override
+                public void done(JSONObject user, BmobException e) {
+                    if (e == null) {
+                        goMainActivity();
+                    } else {
+                        Log.e("BMOB", e.toString());
+                    }
+                }
+            });
 
         }
 

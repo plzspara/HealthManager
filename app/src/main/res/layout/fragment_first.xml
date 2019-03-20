@@ -37,4 +37,18 @@
         android:background="@color/yellow"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="注销登录"
+        android:background="@color/yellow"
+        />
+
+
 </LinearLayout>

@@ -43,8 +43,8 @@ public class WeightActivity extends Activity implements View.OnClickListener {
                     final double result = d_weight / d_height /d_height;
                     BigDecimal bigDecimal = new BigDecimal(result);
                     AlertDialog.Builder builder = new AlertDialog.Builder(WeightActivity.this);
-                    builder.setTitle("成人正常体脂率为18.5-22.9");
-                    builder.setMessage("" + bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
+                    builder.setTitle("成年人正常体重指数为18.5-22.9");
+                    builder.setMessage("你的体重指数为" + bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
                     builder.setCancelable(false);
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override

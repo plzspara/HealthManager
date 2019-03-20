@@ -1,0 +1,208 @@
+package net.kevin.com.healthmanager.activity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+import com.bumptech.glide.Glide;
+
+import net.kevin.com.healthmanager.R;
+import net.kevin.com.healthmanager.javaBean.ShopCar;
+import net.kevin.com.healthmanager.javaBean.User;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobQueryResult;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SQLQueryListener;
+import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
+
+public class DetailActivity extends Activity implements View.OnClickListener {
+
+    private ImageView goodsImage, add, sub;
+    private TextView text_goodsName, text_shopName, text_price, text_sales, text_stocks, text_count;
+    private Button addToShopCar,shopCar;
+    private Toolbar toolbar;
+
+    private Double price = 0.0;
+    private String url, shopName, goodsName, objectId;
+    private int sales = 0, stocks = 0, count = 1;
+    private String userObjectId;
+    private static final String TAG = "DetailActivity";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
+        /*String bql ="select * from ShopCar";
+        new BmobQuery<ShopCar>().doSQLQuery(bql,new SQLQueryListener<ShopCar>(){
+
+            @Override
+            public void done(BmobQueryResult<ShopCar> result, BmobException e) {
+                if(e ==null){
+                    Log.d("ok", "done: "+ ((List<ShopCar>) result.getResults()).get(0).getCount().get(1));
+                }else{
+                    Log.i("smile", "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
+                }
+            }
+        });*/
+        initView();
+        initData();
+    }
+
+    public void initView() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        goodsImage = (ImageView) findViewById(R.id.goodsimage);
+        add = (ImageView) findViewById(R.id.add);
+        sub = (ImageView) findViewById(R.id.sub);
+
+        text_goodsName = (TextView) findViewById(R.id.goodsname);
+        text_shopName = (TextView) findViewById(R.id.shopname);
+        text_price = (TextView) findViewById(R.id.goodsprice);
+        text_sales = (TextView) findViewById(R.id.sales);
+        text_stocks = (TextView) findViewById(R.id.stocks);
+        text_count = (TextView) findViewById(R.id.count);
+
+        addToShopCar = (Button) findViewById(R.id.addtoshopcar);
+        shopCar = (Button) findViewById(R.id.shopcar);
+
+        toolbar.setOnClickListener(this);
+        add.setOnClickListener(this);
+        sub.setOnClickListener(this);
+        addToShopCar.setOnClickListener(this);
+        shopCar.setOnClickListener(this);
+    }
+
+    public void initData() {
+        Intent intent = getIntent();
+        price = intent.getDoubleExtra("price", 0);
+        sales = intent.getIntExtra("sales", 0);
+        stocks = intent.getIntExtra("stocks", 0);
+        url = intent.getStringExtra("url");
+        shopName = intent.getStringExtra("shopName");
+        goodsName = intent.getStringExtra("goodsName");
+        objectId = intent.getStringExtra("objectId");
+
+        Glide.with(getApplicationContext()).load(url).into(goodsImage);
+        text_goodsName.setText(goodsName);
+        text_price.setText("￥" + price);
+        text_sales.setText("销量" + sales);
+        text_shopName.setText(shopName);
+        text_stocks.setText("库存" + stocks);
+        text_count.setText("1");
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.add:
+                if (count < stocks) {
+                    count++;
+                    text_count.setText(count + "");
+                } else {
+                    Toast.makeText(DetailActivity.this, "没有库存了", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.sub:
+                if (count > 1) {
+                    count--;
+                    text_count.setText(count + "");
+                } else {
+                    Toast.makeText(DetailActivity.this, "数量最少为1", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.addtoshopcar:
+                User user = BmobUser.getCurrentUser(User.class);
+                userObjectId = user.getObjectId();
+                String bql = "select obejectId from ShopCar where userId='" + userObjectId + "' " + "and shopName='" + shopName + "'";
+                new BmobQuery<ShopCar>().doSQLQuery(bql, new SQLQueryListener<ShopCar>() {
+
+                    @Override
+                    public void done(BmobQueryResult<ShopCar> result, BmobException e) {
+                        if (e == null) {
+                            List<ShopCar> shopCars = (List<ShopCar>) result.getResults();
+                            if (shopCars.size() > 0) {
+                                update(shopCars.get(0).getObjectId(), count, objectId);
+                            } else {
+                                newUpdate();
+                            }
+                        } else {
+                            Log.i("smile", "错误码：" + e.getErrorCode() + "，错误描述：" + e.getMessage());
+                        }
+                    }
+                });
+                break;
+            case R.id.toolbar:
+                finish();
+                break;
+
+            case R.id.shopcar:
+                Intent intent = new Intent(DetailActivity.this,ShopCarActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void update(String objectId, int count, String goodsId) {
+        ShopCar shopCar = new ShopCar();
+        shopCar.setObjectId(objectId);
+        shopCar.add("goodsId",goodsId);
+        shopCar.add("count",count+"");
+        shopCar.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e==null){
+                    Log.i("bmob","更新成功");
+                }else{
+                    Log.i("bmob","更新失败："+e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void newUpdate() {
+
+        List<String> strings = new ArrayList<>();
+        strings.add(count+"");
+        List<String> list = new ArrayList<>();
+        list.add(objectId);
+        ShopCar shopCar = new ShopCar();
+        shopCar.setShopName(shopName);
+        shopCar.setUserId(userObjectId);
+        shopCar.setCount(strings);
+        shopCar.setGoodsId(list);
+        shopCar.save(new SaveListener<String>() {
+            @Override
+            public void done(String objectId, BmobException e) {
+                if (e == null) {
+                    Log.d(TAG, "done: success");
+                } else {
+                    Log.d(TAG, "done: fail");
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+}
