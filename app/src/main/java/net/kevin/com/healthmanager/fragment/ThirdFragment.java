@@ -1,7 +1,9 @@
 package net.kevin.com.healthmanager.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,14 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.kevin.com.healthmanager.R;
+import net.kevin.com.healthmanager.activity.ShopCarActivity;
 import net.kevin.com.healthmanager.adapter.GoodsAdapter;
 import net.kevin.com.healthmanager.javaBean.shop;
 
-import java.security.KeyPairGeneratorSpi;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
@@ -33,6 +34,7 @@ public class ThirdFragment extends Fragment {
     private List<shop> shops = new ArrayList<>();
 
     private RecyclerView recyclerView;
+    private FloatingActionButton floatingActionButton;
 
     public ThirdFragment() {
         // Required empty public constructor
@@ -46,7 +48,6 @@ public class ThirdFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_third, container, false);
         String bql ="select * from shop";
         new BmobQuery<shop>().doSQLQuery(bql,new SQLQueryListener<shop>(){
-
             @Override
             public void done(BmobQueryResult<shop> result, BmobException e) {
                 if(e ==null){
@@ -62,6 +63,14 @@ public class ThirdFragment extends Fragment {
             }
         });
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
+        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ShopCarActivity.class);
+                startActivity(intent);
+            }
+        });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         return view;

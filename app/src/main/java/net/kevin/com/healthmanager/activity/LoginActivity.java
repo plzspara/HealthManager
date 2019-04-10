@@ -30,6 +30,7 @@ import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     private final String appKey = "57b639f8a7a4b768d7e7add7329bcf34";
 
     private String snsType = "qq";
-    private String openidString, url, nickName, gender, province, city, year;
+    private String openidString,username = "",headImage = "",birthday ="",gender="";;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                                 goMainActivity();
                             } else {
-                                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
                                 Log.d(TAG, "loginByAccount.done: " + e.getMessage());
                             }
                         }
@@ -166,10 +167,17 @@ public class LoginActivity extends AppCompatActivity {
             info.getUserInfo(new IUiListener() {
                 @Override
                 public void onComplete(Object o) {
-                    //用户信息获取到了
 
+                    //用户信息获取到了
                     //Toast.makeText(getApplicationContext(), ((JSONObject) o).getString("nickname")+((JSONObject) o).getString("gender") , Toast.LENGTH_SHORT).show();
-                    Log.v("UserInfo", o.toString());
+                    try {
+                        username = ((JSONObject) o).getString("nickname");
+                        headImage = ((JSONObject) o).getString("figureurl_2");
+                        birthday = ((JSONObject) o).getString("year");
+                        gender =   ((JSONObject) o).getString("gender");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -182,12 +190,18 @@ public class LoginActivity extends AppCompatActivity {
                     Log.v("UserInfo", "onCancel");
                 }
             });
+
+
             BmobUser.BmobThirdUserAuth authInfo = new BmobUser.BmobThirdUserAuth(snsType, mTencent.getAccessToken(), mTencent.getExpiresIn()+"", openidString);
             BmobUser.loginWithAuthData(authInfo, new LogInListener<JSONObject>() {
                 @Override
                 public void done(JSONObject user, BmobException e) {
                     if (e == null) {
-                        goMainActivity();
+                        if (BmobUser.isLogin() && BmobUser.getCurrentUser(User.class).getUsername().equals("")){
+                            registerUserInfo();
+                        } else {
+                            goMainActivity();
+                        }
                     } else {
                         Log.e("BMOB", e.toString());
                     }
@@ -195,6 +209,29 @@ public class LoginActivity extends AppCompatActivity {
             });
 
         }
+
+        public void registerUserInfo(){
+            String objectId = BmobUser.getCurrentUser(User.class).getObjectId();
+            User user = new User();
+            user.setUsername(username);
+            user.setGender(gender);
+            user.setYear(birthday);
+            user.setHeadImage(headImage);
+            user.update(objectId, new UpdateListener() {
+                @Override
+                public void done(BmobException e) {
+                    if (e == null) {
+                        Log.d(TAG, "done: 更新成功");
+                        goMainActivity();
+                    } else {
+                        Log.d(TAG, "done: 更新失败" + e.getMessage());
+                    }
+                }
+            });
+
+        }
+
+
 
         @Override
         public void onError(UiError uiError) {

@@ -51,7 +51,7 @@ public class SecondFragment extends Fragment {
     private MulRecyclerViewAdapter adapter;
     private RecyclerAdapterWithHF mAdapter;
 
-    private String url = "http://v.juhe.cn/toutiao/index?type=top&key=65cdaca310bd5bf342f78a067e24e719";
+    private String url = "http://v.juhe.cn/toutiao/index?type=tiyu&key=65cdaca310bd5bf342f78a067e24e719";
 
 
     @Nullable

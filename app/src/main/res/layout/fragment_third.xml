@@ -3,13 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="net.kevin.com.healthmanager.fragment.ThirdFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="100dp"
+            android:src="@mipmap/tab_shoppingcart"
+            />
+
+    </FrameLayout>
 
 </LinearLayout>

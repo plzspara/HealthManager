@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.HealthReportActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
+
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/run_away"/>
+
+        <TextView
+            android:id="@+id/show_step"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="步数"
+            android:textSize="30sp"
+            android:textColor="@color/red"
+            android:gravity="center"
+            />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/sport"/>
+
+        <TextView
+            android:id="@+id/show_length"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="距离"
+            android:textSize="30sp"
+            android:textColor="@color/red"
+            android:gravity="center"
+            />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/cal" />
+
+        <TextView
+            android:id="@+id/show_cal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="卡路里"
+            android:textColor="@color/red"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/weight"/>
+
+        <TextView
+            android:id="@+id/show_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="体重"
+            android:textColor="@color/red"
+            android:textSize="30sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+
+    </LinearLayout>
+
+
+</ScrollView>

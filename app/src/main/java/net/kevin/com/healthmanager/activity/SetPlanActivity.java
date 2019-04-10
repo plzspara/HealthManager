@@ -1,6 +1,8 @@
 package net.kevin.com.healthmanager.activity;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import net.kevin.com.healthmanager.R;
 import net.kevin.com.healthmanager.step.utils.SharedPreferencesUtils;
@@ -102,38 +105,18 @@ public class SetPlanActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.btn_save:
-                save();
+                int number = Integer.parseInt(tv_step_number.getText().toString());
+                SharedPreferences myPreference = getSharedPreferences("runStep", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = myPreference.edit();
+                editor.putInt("plan", number);
+                editor.commit();
+                Toast.makeText(SetPlanActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.tv_remind_time:
                 showTimeDialog1();
                 break;
         }
-    }
-
-    private void save() {
-        walk_qty = tv_step_number.getText().toString().trim();
-//        remind = "";
-        if (cb_remind.isChecked()) {
-            remind = "1";
-        } else {
-            remind = "0";
-        }
-        achieveTime = tv_remind_time.getText().toString().trim();
-        if (walk_qty.isEmpty() || "0".equals(walk_qty)) {
-            sp.setParam("planWalk_QTY", "7000");
-        } else {
-            sp.setParam("planWalk_QTY", walk_qty);
-        }
-        sp.setParam("remind", remind);
-
-        if (achieveTime.isEmpty()) {
-            sp.setParam("achieveTime", "21:00");
-            this.achieveTime = "21:00";
-        } else {
-            sp.setParam("achieveTime", achieveTime);
-        }
-                finish();
     }
 
     private void showTimeDialog1() {

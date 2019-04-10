@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_src_tianjin"
+    tools:context=".activity.PersonInfoActivity">
+
+
+
+    <TextView
+        android:id="@+id/tv_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="头像修改"
+        android:textSize="35sp"
+        android:gravity="center"
+        android:paddingTop="100dp"
+        android:textColor="@color/red"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_nick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="昵称性别修改"
+        android:textSize="35sp"
+        android:textColor="@color/red"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <TextView
+        android:id="@+id/birth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="生日修改"
+        android:textSize="35sp"
+        android:textColor="@color/red"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="密码修改"
+        android:textSize="35sp"
+        android:textColor="@color/red"/>
+
+
+
+
+
+</LinearLayout>

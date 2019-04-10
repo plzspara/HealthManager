@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.UpdateBirthdayActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改生日"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/red"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="100dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_person_black"/>
+
+        <EditText
+            android:id="@+id/et_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入新的生日"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <Button
+        android:id="@+id/bt_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确认"
+        android:textSize="20sp"
+        android:background="@color/yellow"/>
+
+</LinearLayout>

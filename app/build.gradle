@@ -46,6 +46,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+
     api 'net.qiujuer.genius:ui:2.1.0'
     api 'net.qiujuer.genius:res:2.1.0'
     implementation files('libs/lite-orm-1.7.0.jar')

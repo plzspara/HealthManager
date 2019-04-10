@@ -134,7 +134,6 @@ public class ShoppingCarAdapter extends BaseExpandableListAdapter {
         groupViewHolder.ivSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: " + groupPosition);
                 ShopCar selectData = data.get(groupPosition);
                 isSelect_shop = !selectData.getSelect_Shops();
                 selectData.setSelect_Shops(isSelect_shop);

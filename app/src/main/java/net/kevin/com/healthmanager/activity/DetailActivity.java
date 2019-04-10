@@ -169,7 +169,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
             @Override
             public void done(BmobException e) {
                 if(e==null){
-                    Log.i("bmob","更新成功");
+                    Toast.makeText(DetailActivity.this,"添加成功",Toast.LENGTH_SHORT);
                 }else{
                     Log.i("bmob","更新失败："+e.getMessage());
                 }
@@ -192,7 +192,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
             @Override
             public void done(String objectId, BmobException e) {
                 if (e == null) {
-                    Log.d(TAG, "done: success");
+                    Toast.makeText(DetailActivity.this,"添加成功",Toast.LENGTH_SHORT);
                 } else {
                     Log.d(TAG, "done: fail");
                 }

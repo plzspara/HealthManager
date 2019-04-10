@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -17,16 +18,31 @@ import android.widget.Toast;
 
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
+import com.tencent.connect.UserInfo;
+import com.tencent.connect.auth.QQToken;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 
 import net.kevin.com.healthmanager.R;
 import net.kevin.com.healthmanager.fragment.FirstFragment;
+import net.kevin.com.healthmanager.fragment.FourthFragment;
 import net.kevin.com.healthmanager.fragment.SecondFragment;
-import net.kevin.com.healthmanager.fragment.TestFragment;
 import net.kevin.com.healthmanager.adapter.ViewPagerAdapter;
 import net.kevin.com.healthmanager.fragment.ThirdFragment;
+import net.kevin.com.healthmanager.javaBean.User;
+import net.kevin.com.healthmanager.step.utils.DbUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FetchUserInfoListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -45,7 +61,6 @@ public class MainActivity extends AppCompatActivity  {
 
         public void onReceive(Context context, Intent intent) {
             String s = intent.getAction();
-            Log.d("Receiver", "onReceive: " + s);
             if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)) {
                 //Toast.makeText(MainActivity.this,"apikey验证失败，地图功能无法正常使用",Toast.LENGTH_SHORT).show();
             } else if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)) {
@@ -73,8 +88,28 @@ public class MainActivity extends AppCompatActivity  {
         iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
         mReceiver = new SDKReceiver();
         registerReceiver(mReceiver, iFilter);
+        BmobUser.fetchUserInfo(new FetchUserInfoListener<BmobUser>() {
+            @Override
+            public void done(BmobUser user, BmobException e) {
+                if (e == null) {
 
+                } else {
+                    Log.e("error",e.getMessage());
+                }
+            }
+        });
 
+        SharedPreferences sharedPreferences = getSharedPreferences("runStep", Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("objectId","asdf");
+        String objectId = BmobUser.getCurrentUser(User.class).getObjectId();
+        if (!id.equals(objectId)) {
+            SharedPreferences myPreference = getSharedPreferences("runStep", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = myPreference.edit();
+            editor.putString("objectId", objectId);
+            editor.putInt("step",0);
+            editor.putInt("plan",10000);
+            editor.commit();
+        }
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -106,12 +141,19 @@ public class MainActivity extends AppCompatActivity  {
         FirstFragment firstFragment = new FirstFragment();
         SecondFragment secondFragment = new SecondFragment();
         ThirdFragment thirdFragment = new ThirdFragment();
+        FourthFragment fourthFragment = new FourthFragment();
         List<Fragment> list = new ArrayList<>();
         list.add(firstFragment);
         list.add(secondFragment);
         list.add(thirdFragment);
-        list.add(TestFragment.newInstance("个人"));
+        list.add(fourthFragment);
         viewPagerAdapter.setList(list);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

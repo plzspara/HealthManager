@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobQueryResult;
@@ -53,19 +52,16 @@ public class ShopCarActivity extends AppCompatActivity implements View.OnClickLi
     Button btnOrder, btnDelete;
     RelativeLayout rlTotalPrice, rl, rlNoContant;
     private List<ShopCar> shopCars = new ArrayList<ShopCar>();
-    private List<ShopCar.shop> shops = new ArrayList<>();
     private Context context;
     private ShoppingCarAdapter shoppingCarAdapter;
     private List<Integer> a = new ArrayList<>();
     private List<Integer> b = new ArrayList<>();
-    private int count1 = 0, count2 = 0;
     private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_car);
-        Bmob.initialize(this, "57b639f8a7a4b768d7e7add7329bcf34");
         context = this;
         initView();
         initExpandableListView();
@@ -117,8 +113,6 @@ public class ShopCarActivity extends AppCompatActivity implements View.OnClickLi
     private void initGoods() {
         for (int i = 0; i < shopCars.size(); i++) {
             for (int j = 0; j < shopCars.get(i).getGoodsId().size(); j++) {
-                a.add(i);
-                b.add(j);
                 String objectId = shopCars.get(i).getGoodsId().get(j);
                 query(objectId);
             }
@@ -142,16 +136,22 @@ public class ShopCarActivity extends AppCompatActivity implements View.OnClickLi
 
 
     private void addGoods(ShopCar.shop shop) {
-        int x = a.get(count1);
-        count1++;
-        int y = b.get(count2);
-        count2++;
-        shops.add(shop);
-        if (y == shopCars.get(x).getGoodsId().size() - 1 && x != shopCars.size() - 1) {
-            shopCars.get(x).setShops(shops);
-            shops = new ArrayList<>();
-        } else if (x == shopCars.size() - 1 && y == shopCars.get(shopCars.size() - 1).getGoodsId().size() - 1) {
-            shopCars.get(x).setShops(shops);
+        for (int i=0;i<shopCars.size();i++) {
+            if (shopCars.get(i).getShopName().equals(shop.getShopName())){
+                shopCars.get(i).getShops().add(shop);
+            }
+        }
+        //完成状态
+        boolean status = true;
+
+        for (int i =0;i<shopCars.size();i++) {
+            if (shopCars.get(i).getShops().size() != shopCars.get(i).getGoodsId().size()){
+                status = false;
+                break;
+            }
+        }
+
+        if (status) {
             initExpandableListViewData(shopCars);
         }
     }

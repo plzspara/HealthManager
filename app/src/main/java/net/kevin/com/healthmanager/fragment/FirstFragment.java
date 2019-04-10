@@ -1,37 +1,31 @@
 package net.kevin.com.healthmanager.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.tencent.tauth.Tencent;
 
 import net.kevin.com.healthmanager.R;
 import net.kevin.com.healthmanager.activity.DynamicDemo;
-import net.kevin.com.healthmanager.activity.HistoryActivity;
-import net.kevin.com.healthmanager.activity.LoginActivity;
-import net.kevin.com.healthmanager.activity.StepActivity;
+
 import net.kevin.com.healthmanager.activity.WeightActivity;
+import net.kevin.com.healthmanager.javaBean.User;
 import net.kevin.com.healthmanager.step.StepArcView;
-import net.kevin.com.healthmanager.step.utils.SharedPreferencesUtils;
 
-import java.io.IOException;
 
-import cn.bmob.v3.Bmob;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import cn.bmob.v3.BmobUser;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,8 +34,8 @@ public class FirstFragment extends Fragment {
 
 
     private StepArcView stepArcView;
-    private SharedPreferencesUtils sp;
-    private Button btn_start,btn_weight,btn_logout;
+    private SharedPreferences sharedPreferences;
+    private Button btn_start,btn_weight;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,13 +46,12 @@ public class FirstFragment extends Fragment {
         stepArcView = (StepArcView) view.findViewById(R.id.step);
         btn_start = (Button) view.findViewById(R.id.start_running);
         btn_weight = (Button) view.findViewById(R.id.weight);
-        btn_logout = (Button) view.findViewById(R.id.logout);
 
         stepArcView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), HistoryActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getActivity(), HistoryActivity.class);
+                startActivity(intent);*/
             }
         });
         btn_start.setOnClickListener(new View.OnClickListener() {
@@ -76,15 +69,6 @@ public class FirstFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BmobUser.logOut();
-                Intent intent = new Intent(getActivity(),LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
 
         return view;
     }
@@ -98,9 +82,39 @@ public class FirstFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        sp = new SharedPreferencesUtils(getContext());
-        int step = (int) sp.getParam("runStep", 0);
-        stepArcView.setCurrentCount(10000, step);
+        User user = BmobUser.getCurrentUser(User.class);
+        int userStep = Integer.parseInt(user.getStep().get(user.getStep().size()-1));
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String currentTime = sdf.format(date);
+        sharedPreferences = getActivity().getSharedPreferences("runStep", Context.MODE_PRIVATE);
+        String time = sharedPreferences.getString("time","2018");
+        int stepPlan = sharedPreferences.getInt("plan",10000);
+        if (time.equals(currentTime)){
+            Log.d("tag", "onResume: equal");
+            int step = sharedPreferences.getInt("step",0);
+            if (currentTime.equals(user.getStepDate().get(user.getStepDate().size()-1))) {
+                if (step>userStep) {
+                    stepArcView.setCurrentCount(stepPlan, step);
+                } else {
+                    stepArcView.setCurrentCount(stepPlan, userStep);
+                }
+            } else {
+                stepArcView.setCurrentCount(stepPlan, 0);
+            }
+
+
+        } else {
+            Log.d("tag", "onResume:not equal ");
+            SharedPreferences myPreference = getActivity().getSharedPreferences("runStep", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = myPreference.edit();
+            editor.putInt("plan", 10000);
+            editor.putString("time",currentTime);
+            editor.putInt("step",0);
+            editor.commit();
+            stepArcView.setCurrentCount(10000, 0);
+        }
+
     }
 
 }

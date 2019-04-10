@@ -4,14 +4,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import net.kevin.com.healthmanager.R;
+import net.kevin.com.healthmanager.javaBean.User;
 
 import java.math.BigDecimal;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class WeightActivity extends Activity implements View.OnClickListener {
 
@@ -37,14 +43,25 @@ public class WeightActivity extends Activity implements View.OnClickListener {
             case R.id.btn_determine:
                 String weight = edit_weight.getText().toString();
                 String height = edit_height.getText().toString();
+                double userWeight = BmobUser.getCurrentUser(User.class).getWeight();
+                String info = "";
                 if (!weight.isEmpty() && !height.isEmpty()) {
                     double d_weight = Double.parseDouble(weight);
                     double d_height = Double.parseDouble(height);
+                    if (userWeight > 0) {
+                        if (userWeight > d_weight) {
+                            info = ",与上次测量相比减少了" + (userWeight - d_weight) + "kg";
+                        } else if (userWeight < d_weight) {
+                            info = ",与上次测量相比增加了" + (d_weight - userWeight) + "kg";
+                        } else {
+                            info = ",与上次测量相比体重没有变化";
+                        }
+                    }
                     final double result = d_weight / d_height /d_height;
                     BigDecimal bigDecimal = new BigDecimal(result);
                     AlertDialog.Builder builder = new AlertDialog.Builder(WeightActivity.this);
                     builder.setTitle("成年人正常体重指数为18.5-22.9");
-                    builder.setMessage("你的体重指数为" + bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue());
+                    builder.setMessage("你的体重指数为" + bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue() + info);
                     builder.setCancelable(false);
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
@@ -59,6 +76,19 @@ public class WeightActivity extends Activity implements View.OnClickListener {
                         }
                     });
                     builder.show();
+
+                    User user = new User();
+                    user.setWeight(d_weight);
+                    user.update(BmobUser.getCurrentUser(User.class).getObjectId(), new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            if (e == null) {
+
+                            } else {
+                                Log.d("tag", "done: " + e.getMessage());
+                            }
+                        }
+                    });
                     break;
                 } else {
                     Toast.makeText(WeightActivity.this,"请输入",Toast.LENGTH_SHORT).show();

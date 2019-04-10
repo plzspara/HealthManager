@@ -2,6 +2,7 @@ package net.kevin.com.healthmanager.javaBean;
 
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
@@ -17,7 +18,7 @@ public class ShopCar extends BmobObject {
     private List<String> count;
     private List<String> goodsId;
     private Boolean isSelect_Shops = false;
-    private List<shop> shops;
+    private List<shop> shops = new ArrayList<>();
 
     public List<shop> getShops() {
         return shops;
@@ -70,15 +71,6 @@ public class ShopCar extends BmobObject {
     }
 
 
-    /*public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }*/
-
-
 
     public static class shop{
         private String objectId;
@@ -86,7 +78,16 @@ public class ShopCar extends BmobObject {
         private int stocks;
         private Double price;
         private String goodsName;
+        private String shopName;
         private Boolean isSelect_Goods = false;
+
+        public String getShopName() {
+            return shopName;
+        }
+
+        public void setShopName(String shopName) {
+            this.shopName = shopName;
+        }
 
         public String getObjectId() {
             return objectId;
