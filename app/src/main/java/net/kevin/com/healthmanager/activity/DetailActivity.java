@@ -27,6 +27,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -108,6 +109,12 @@ public class DetailActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        count=1;
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add:
@@ -130,14 +137,57 @@ public class DetailActivity extends Activity implements View.OnClickListener {
                 User user = BmobUser.getCurrentUser(User.class);
                 userObjectId = user.getObjectId();
                 String bql = "select obejectId from ShopCar where userId='" + userObjectId + "' " + "and shopName='" + shopName + "'";
-                new BmobQuery<ShopCar>().doSQLQuery(bql, new SQLQueryListener<ShopCar>() {
+
+                BmobQuery<ShopCar> categoryBmobQuery = new BmobQuery<>();
+                categoryBmobQuery.addWhereEqualTo("userId", userObjectId);
+                categoryBmobQuery.addWhereEqualTo("shopName", shopName);
+                categoryBmobQuery.findObjects(new FindListener<ShopCar>() {
+                    @Override
+                    public void done(List<ShopCar> object, BmobException e) {
+                        if (e == null) {
+                            List<ShopCar> shopCars = object;
+                            if (shopCars!=null && shopCars.size()>0) {
+
+                                for (int i=0;i<shopCars.get(0).getGoodsId().size();i++) {
+                                    if (shopCars.get(0).getGoodsId().get(i).equals(objectId)) {
+                                        count += Integer.parseInt(shopCars.get(0).getCount().get(i));
+                                        updateAdd(shopCars.get(0).getObjectId(),count,i);
+                                        break;
+                                    }
+                                    if (i==shopCars.get(0).getGoodsId().size()-1) {
+                                        update(shopCars.get(0).getObjectId(), count, objectId);
+                                    }
+                                }
+
+                            } else {
+                                newUpdate();
+                            }
+                        } else {
+                            Log.e("BMOB", e.toString());
+                        }
+                    }
+                });
+
+
+                /*new BmobQuery<ShopCar>().doSQLQuery(bql, new SQLQueryListener<ShopCar>() {
 
                     @Override
                     public void done(BmobQueryResult<ShopCar> result, BmobException e) {
                         if (e == null) {
                             List<ShopCar> shopCars = (List<ShopCar>) result.getResults();
-                            if (shopCars.size() > 0) {
-                                update(shopCars.get(0).getObjectId(), count, objectId);
+                            if (shopCars!=null && shopCars.size()>0) {
+
+                                for (int i=0;i<shopCars.get(0).getGoodsId().size();i++) {
+                                    if (shopCars.get(0).getGoodsId().get(i).equals(objectId)) {
+                                        count += Integer.parseInt(shopCars.get(0).getCount().get(i));
+                                        updateAdd(shopCars.get(0).getObjectId(),count,i);
+                                        break;
+                                    }
+                                    if (i==shopCars.get(0).getGoodsId().size()-1) {
+                                        update(shopCars.get(0).getObjectId(), count, objectId);
+                                    }
+                                }
+
                             } else {
                                 newUpdate();
                             }
@@ -145,7 +195,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
                             Log.i("smile", "错误码：" + e.getErrorCode() + "，错误描述：" + e.getMessage());
                         }
                     }
-                });
+                });*/
                 break;
             case R.id.toolbar:
                 finish();
@@ -169,8 +219,23 @@ public class DetailActivity extends Activity implements View.OnClickListener {
             @Override
             public void done(BmobException e) {
                 if(e==null){
-                    Toast.makeText(DetailActivity.this,"添加成功",Toast.LENGTH_SHORT);
+                    Toast.makeText(DetailActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
                 }else{
+                    Log.i("bmob","更新失败："+e.getMessage());
+                }
+            }
+        });
+    }
+
+    public void updateAdd(String objectId, int count,int position) {
+        ShopCar shopCar = new ShopCar();
+        shopCar.setValue("count."+position,count+"");
+        shopCar.update(objectId, new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    Toast.makeText(DetailActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
+                } else {
                     Log.i("bmob","更新失败："+e.getMessage());
                 }
             }
@@ -192,7 +257,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
             @Override
             public void done(String objectId, BmobException e) {
                 if (e == null) {
-                    Toast.makeText(DetailActivity.this,"添加成功",Toast.LENGTH_SHORT);
+                    Toast.makeText(DetailActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
                 } else {
                     Log.d(TAG, "done: fail");
                 }

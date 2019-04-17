@@ -30,6 +30,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -66,6 +67,7 @@ public class ShopCarActivity extends AppCompatActivity implements View.OnClickLi
         initView();
         initExpandableListView();
         initData();
+
     }
 
     private void initView() {
@@ -93,20 +95,50 @@ public class ShopCarActivity extends AppCompatActivity implements View.OnClickLi
     private void initData() {
         User user = BmobUser.getCurrentUser(User.class);
         String userId = user.getObjectId();
-        String bql = "select * from ShopCar where userId = '"+userId+"'";
+        /*String bql = "select * from ShopCar where userId = '" + userId + "'";
         new BmobQuery<ShopCar>().doSQLQuery(bql, new SQLQueryListener<ShopCar>() {
 
             @Override
             public void done(BmobQueryResult<ShopCar> result, BmobException e) {
                 if (e == null) {
                     shopCars = (List<ShopCar>) result.getResults();
-                    initGoods();
+                    if (shopCars.get(0).getGoodsId().size() == 0) {
+                        tvTitlebarRight.setVisibility(View.GONE);
+                        rlNoContant.setVisibility(View.VISIBLE);
+                        elvShoppingCar.setVisibility(View.GONE);
+                        rl.setVisibility(View.GONE);
+                    } else {
+                        initGoods();
+                    }
+
+                } else {
+                    Log.i("smile", "错误码：" + e.getErrorCode() + "，错误描述：" + e.getMessage());
+                }
+            }
+        });*/
+
+        BmobQuery<ShopCar> categoryBmobQuery = new BmobQuery<>();
+        categoryBmobQuery.addWhereEqualTo("userId", userId);
+        categoryBmobQuery.findObjects(new FindListener<ShopCar>() {
+
+            @Override
+            public void done(List<ShopCar> list, BmobException e) {
+                if (e == null) {
+                    shopCars = list;
+                    if (shopCars.size()==0) {
+                        tvTitlebarRight.setVisibility(View.GONE);
+                        rlNoContant.setVisibility(View.VISIBLE);
+                        elvShoppingCar.setVisibility(View.GONE);
+                        rl.setVisibility(View.GONE);
+                    } else {
+                        initGoods();
+                    }
+
                 } else {
                     Log.i("smile", "错误码：" + e.getErrorCode() + "，错误描述：" + e.getMessage());
                 }
             }
         });
-
         //initExpandableListViewData(shopCars);
     }
 
@@ -136,16 +168,16 @@ public class ShopCarActivity extends AppCompatActivity implements View.OnClickLi
 
 
     private void addGoods(ShopCar.shop shop) {
-        for (int i=0;i<shopCars.size();i++) {
-            if (shopCars.get(i).getShopName().equals(shop.getShopName())){
+        for (int i = 0; i < shopCars.size(); i++) {
+            if (shopCars.get(i).getShopName().equals(shop.getShopName())) {
                 shopCars.get(i).getShops().add(shop);
             }
         }
         //完成状态
         boolean status = true;
 
-        for (int i =0;i<shopCars.size();i++) {
-            if (shopCars.get(i).getShops().size() != shopCars.get(i).getGoodsId().size()){
+        for (int i = 0; i < shopCars.size(); i++) {
+            if (shopCars.get(i).getShops().size() != shopCars.get(i).getGoodsId().size()) {
                 status = false;
                 break;
             }
@@ -168,6 +200,7 @@ public class ShopCarActivity extends AppCompatActivity implements View.OnClickLi
         shoppingCarAdapter.setOnDeleteListener(new ShoppingCarAdapter.OnDeleteListener() {
             @Override
             public void onDelete(List<ShopCar> object) {
+                Log.i("setondelete", "onDelete: ");
                 for (int i = 0; i < object.size(); i++) {
                     if (object.get(i).getSelect_Shops()) {
                         ShopCar shopCar = new ShopCar();
@@ -184,20 +217,19 @@ public class ShopCarActivity extends AppCompatActivity implements View.OnClickLi
                         });
                     } else {
                         for (int j = 0; j < object.get(i).getShops().size(); j++) {
-                            Log.d(TAG, "onDelete: " + i + "-" + j);
                             if (object.get(i).getShops().get(j).getSelect_Goods()) {
                                 ShopCar shopCar = new ShopCar();
                                 shopCar.setObjectId(object.get(i).getObjectId());
                                 shopCar.removeAll("goodsId", Arrays.asList(object.get(i).getGoodsId().get(j)));
-                                shopCar.removeAll("count",Arrays.asList(object.get(i).getCount().get(j)));
+                                shopCar.removeAll("count", Arrays.asList(object.get(i).getCount().get(j)));
                                 shopCar.update(new UpdateListener() {
 
                                     @Override
                                     public void done(BmobException e) {
-                                        if(e==null){
-                                            Log.i("bmob","成功");
-                                        }else{
-                                            Log.i("bmob","失败："+e.getMessage());
+                                        if (e == null) {
+                                            Log.i("bmob", "成功");
+                                        } else {
+                                            Log.i("bmob", "失败：" + e.getMessage());
                                         }
                                     }
                                 });
@@ -218,14 +250,14 @@ public class ShopCarActivity extends AppCompatActivity implements View.OnClickLi
                  * 通过initExpandableListViewData（）方法刷新购物车数据。
                  */
                 ShopCar shopCar = new ShopCar();
-                shopCar.setValue("count."+position,count+"");
+                shopCar.setValue("count." + position, count + "");
                 shopCar.update(objectId, new UpdateListener() {
                     @Override
                     public void done(BmobException e) {
-                        if(e==null){
-                            Log.i("bmob","成功");
-                        }else{
-                            Log.i("bmob","失败："+e.getMessage());
+                        if (e == null) {
+                            Log.i("bmob", "成功");
+                        } else {
+                            Log.i("bmob", "失败：" + e.getMessage());
                         }
                     }
                 });

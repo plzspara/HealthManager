@@ -201,6 +201,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
         mLocClient.setLocOption(option);
 
         textView = (TextView) findViewById(R.id.text_step);
+        textView.setText("0");
         initTodayData();
         initBroadcastReceiver();
         startTimeCount();
@@ -870,5 +871,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
             }
         });
     }
+
+
 
 }

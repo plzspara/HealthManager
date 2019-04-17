@@ -178,7 +178,7 @@
             android:layout_below="@+id/iv_no_contant"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="购物车竟然是空的，快去购买书籍充实自己吧！"
+            android:text="购物车竟然是空的，去商城看看吧"
             android:textColor="#808080"
             android:textSize="16dp" />
     </RelativeLayout>

@@ -132,6 +132,7 @@
                         android:id="@+id/sub"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
                         android:background="@drawable/ic_arrow_back" />
 
                     <TextView
@@ -140,7 +141,8 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text="0"
+                        android:layout_gravity="bottom"
+                        android:text="1"
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
@@ -148,6 +150,7 @@
                         android:id="@+id/add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
                         android:background="@drawable/ic_arrow_forward" />
 
                 </LinearLayout>
