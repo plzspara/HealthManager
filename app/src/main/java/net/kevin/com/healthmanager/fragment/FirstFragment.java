@@ -83,7 +83,10 @@ public class FirstFragment extends Fragment {
     public void onResume() {
         super.onResume();
         User user = BmobUser.getCurrentUser(User.class);
-        int userStep = Integer.parseInt(user.getStep().get(user.getStep().size()-1));
+        int userStep = 0;
+        if (user.getStep()!=null) {
+            userStep = Integer.parseInt(user.getStep().get(user.getStep().size()-1));
+        }
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String currentTime = sdf.format(date);
@@ -93,7 +96,7 @@ public class FirstFragment extends Fragment {
         if (time.equals(currentTime)){
             Log.d("tag", "onResume: equal");
             int step = sharedPreferences.getInt("step",0);
-            if (currentTime.equals(user.getStepDate().get(user.getStepDate().size()-1))) {
+            if (user.getStepDate()!=null && currentTime.equals(user.getStepDate().get(user.getStepDate().size()-1))) {
                 if (step>userStep) {
                     stepArcView.setCurrentCount(stepPlan, step);
                 } else {

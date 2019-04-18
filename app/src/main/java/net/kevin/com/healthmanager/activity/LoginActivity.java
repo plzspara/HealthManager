@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private final String appKey = "57b639f8a7a4b768d7e7add7329bcf34";
 
     private String snsType = "qq";
-    private String openidString,username = "",headImage = "",birthday ="",gender="";;
+    private String openidString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private class BaseUiListener implements IUiListener {
+        String userName,birthday,gender,headImage;
         public void onComplete(Object response) {
             // TODO Auto-generated method stub
             Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
@@ -171,10 +173,19 @@ public class LoginActivity extends AppCompatActivity {
                     //用户信息获取到了
                     //Toast.makeText(getApplicationContext(), ((JSONObject) o).getString("nickname")+((JSONObject) o).getString("gender") , Toast.LENGTH_SHORT).show();
                     try {
-                        username = ((JSONObject) o).getString("nickname");
+                        userName = ((JSONObject) o).getString("nickname");
                         headImage = ((JSONObject) o).getString("figureurl_2");
                         birthday = ((JSONObject) o).getString("year");
                         gender =   ((JSONObject) o).getString("gender");
+                        if (BmobUser.getCurrentUser(User.class).getHeadImage() == null && BmobUser.isLogin()) {
+                            Log.d(TAG, "isfirst: true");
+                            registerUserInfo(userName,gender,headImage,birthday);
+                        } else if (BmobUser.isLogin()){
+                            Log.d(TAG, "isfirst: false");
+
+                            goMainActivity();
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -197,11 +208,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void done(JSONObject user, BmobException e) {
                     if (e == null) {
-                        if (BmobUser.isLogin() && BmobUser.getCurrentUser(User.class).getUsername().equals("")){
-                            registerUserInfo();
-                        } else {
-                            goMainActivity();
-                        }
+
                     } else {
                         Log.e("BMOB", e.toString());
                     }
@@ -210,9 +217,10 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-        public void registerUserInfo(){
+        public void registerUserInfo(String username,String gender,String headImage,String birthday){
             String objectId = BmobUser.getCurrentUser(User.class).getObjectId();
             User user = new User();
+            Log.d(TAG, "registerUserInfo: " + username + "  " + gender + "   "+ headImage);
             user.setUsername(username);
             user.setGender(gender);
             user.setYear(birthday);
