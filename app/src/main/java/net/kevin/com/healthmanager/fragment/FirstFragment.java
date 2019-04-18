@@ -94,7 +94,6 @@ public class FirstFragment extends Fragment {
         String time = sharedPreferences.getString("time","2018");
         int stepPlan = sharedPreferences.getInt("plan",10000);
         if (time.equals(currentTime)){
-            Log.d("tag", "onResume: equal");
             int step = sharedPreferences.getInt("step",0);
             if (user.getStepDate()!=null && currentTime.equals(user.getStepDate().get(user.getStepDate().size()-1))) {
                 if (step>userStep) {
@@ -108,7 +107,6 @@ public class FirstFragment extends Fragment {
 
 
         } else {
-            Log.d("tag", "onResume:not equal ");
             SharedPreferences myPreference = getActivity().getSharedPreferences("runStep", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = myPreference.edit();
             editor.putInt("plan", 10000);

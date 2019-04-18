@@ -46,7 +46,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".activity.StepHistoryActivity" />
         <activity android:name=".activity.HealthReportActivity" />
-        <activity android:name=".activity.UpdateBirthdayActivity" />
         <activity android:name=".activity.UpdateNickNameActivity" />
         <activity android:name=".activity.UpdatePasswordActivity" />
         <activity android:name=".activity.ChooseActivity" />

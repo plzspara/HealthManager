@@ -10,7 +10,7 @@ import net.kevin.com.healthmanager.R;
 
 public class PersonInfoActivity extends AppCompatActivity {
 
-    private TextView head,nick,password,birth;
+    private TextView head,nick,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +23,7 @@ public class PersonInfoActivity extends AppCompatActivity {
     head = (TextView) findViewById(R.id.tv_head);
     nick = (TextView) findViewById(R.id.tv_nick);
     password = (TextView) findViewById(R.id.tv_password);
-    birth = (TextView) findViewById(R.id.birth);
 
-
-    birth.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(PersonInfoActivity.this,UpdateBirthdayActivity.class);
-            startActivity(intent);
-        }
-    });
 
     nick.setOnClickListener(new View.OnClickListener() {
         @Override

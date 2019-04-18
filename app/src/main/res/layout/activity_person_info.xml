@@ -36,18 +36,6 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 
-    <TextView
-        android:id="@+id/birth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="生日修改"
-        android:textSize="35sp"
-        android:textColor="@color/red"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp"/>
 
     <TextView
         android:id="@+id/tv_password"
