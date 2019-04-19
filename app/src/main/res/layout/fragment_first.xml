@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/bg_src_morning"
     tools:context="net.kevin.com.healthmanager.fragment.FirstFragment">
@@ -17,7 +16,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="200dp" />
 
-    <net.qiujuer.genius.ui.widget.Button
+    <Button
         android:id="@+id/start_running"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -26,16 +25,13 @@
         android:background="@drawable/sel_btn_yellow_alpha_44"
         android:text="开始运动"
         android:textColor="@color/black"
-        app:gTouchColor="@color/colorAccentAlpha"
-        app:gTouchCornerRadius="22dp"
-        app:gTouchEffect="ripple" />
+        />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 
-
-    <net.qiujuer.genius.ui.widget.Button
+    <Button
         android:id="@+id/weight"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -44,9 +40,8 @@
         android:background="@drawable/sel_btn_yellow_alpha_44"
         android:text="体重管理"
         android:textColor="@color/black"
-        app:gTouchColor="@color/colorAccentAlpha"
-        app:gTouchCornerRadius="22dp"
-        app:gTouchEffect="ripple" />
+        />
+
 
 
 

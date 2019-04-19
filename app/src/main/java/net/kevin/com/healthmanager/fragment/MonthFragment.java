@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,8 +124,12 @@ public class MonthFragment extends Fragment {
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String currentTime = sdf.format(date);
-        String month = currentTime.substring(0,7);
+        String month = currentTime.substring(5,7);
         String day = currentTime.substring(8,10);
+
+        if (month.substring(0,1).equals("0")) {
+            month = month.substring(1,2);
+        }
 
 
 
@@ -159,6 +164,7 @@ public class MonthFragment extends Fragment {
             Date endDate = cal.getTime();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String d = simpleDateFormat.format(endDate);
+            Log.d("data", "setData: "+d);
             int k = user.getStepDate().size();
             for (int j = 0; j < count;j++) {
                 if ( k-1-j>=0 && user.getStepDate().get(k-1-j).equals(d)) {
@@ -181,7 +187,7 @@ public class MonthFragment extends Fragment {
             chart.notifyDataSetChanged();
 
         } else {
-            set1 = new BarDataSet(values, "3月");
+            set1 = new BarDataSet(values, month+"月");
             set1.setDrawIcons(false);
 
 //            set1.setColors(ColorTemplate.MATERIAL_COLORS);
