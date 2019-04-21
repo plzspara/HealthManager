@@ -76,6 +76,12 @@ public class ThirdFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
     public void goods(){
         GoodsAdapter goodsAdapter = new GoodsAdapter(getContext(),shops);
         recyclerView.setAdapter(goodsAdapter);

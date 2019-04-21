@@ -28,6 +28,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -62,7 +63,6 @@ public class DetailActivity extends Activity implements View.OnClickListener {
             }
         });*/
         initView();
-        initData();
     }
 
     public void initView() {
@@ -90,14 +90,33 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
     public void initData() {
         Intent intent = getIntent();
-        price = intent.getDoubleExtra("price", 0);
-        sales = intent.getIntExtra("sales", 0);
-        stocks = intent.getIntExtra("stocks", 0);
-        url = intent.getStringExtra("url");
-        shopName = intent.getStringExtra("shopName");
-        goodsName = intent.getStringExtra("goodsName");
         objectId = intent.getStringExtra("objectId");
 
+        BmobQuery<ShopCar.shop> query = new BmobQuery<ShopCar.shop>();
+        query.getObject(objectId, new QueryListener<ShopCar.shop>() {
+
+            @Override
+            public void done(ShopCar.shop object, BmobException e) {
+                if(e==null){
+                    goodsName = object.getGoodsName();
+                    price = object.getPrice();
+                    sales = object.getSales();
+                    stocks = object.getStocks();
+                    shopName = object.getShopName();
+                    url = object.getGoodImage();
+                    show();
+                }else{
+                    Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
+                }
+            }
+
+        });
+
+
+
+    }
+
+    private void show() {
         Glide.with(getApplicationContext()).load(url).into(goodsImage);
         text_goodsName.setText(goodsName);
         text_price.setText("￥" + price);
@@ -105,13 +124,13 @@ public class DetailActivity extends Activity implements View.OnClickListener {
         text_shopName.setText(shopName);
         text_stocks.setText("库存" + stocks);
         text_count.setText("1");
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         count=1;
+        initData();
     }
 
     @Override
@@ -136,7 +155,6 @@ public class DetailActivity extends Activity implements View.OnClickListener {
             case R.id.addtoshopcar:
                 User user = BmobUser.getCurrentUser(User.class);
                 userObjectId = user.getObjectId();
-                String bql = "select obejectId from ShopCar where userId='" + userObjectId + "' " + "and shopName='" + shopName + "'";
 
                 BmobQuery<ShopCar> categoryBmobQuery = new BmobQuery<>();
                 categoryBmobQuery.addWhereEqualTo("userId", userObjectId);
@@ -148,54 +166,32 @@ public class DetailActivity extends Activity implements View.OnClickListener {
                             List<ShopCar> shopCars = object;
                             if (shopCars!=null && shopCars.size()>0) {
 
-                                for (int i=0;i<shopCars.get(0).getGoodsId().size();i++) {
-                                    if (shopCars.get(0).getGoodsId().get(i).equals(objectId)) {
-                                        count += Integer.parseInt(shopCars.get(0).getCount().get(i));
-                                        updateAdd(shopCars.get(0).getObjectId(),count,i);
-                                        break;
-                                    }
-                                    if (i==shopCars.get(0).getGoodsId().size()-1) {
-                                        update(shopCars.get(0).getObjectId(), count, objectId);
+                                if (shopCars.get(0).getGoodsId().size() == 0) {
+                                    update(shopCars.get(0).getObjectId(), count, objectId);
+
+                                } else {
+                                    for (int i=0;i<shopCars.get(0).getGoodsId().size();i++) {
+                                        if (shopCars.get(0).getGoodsId().get(i).equals(objectId)) {
+                                            count += Integer.parseInt(shopCars.get(0).getCount().get(i));
+                                            updateAdd(shopCars.get(0).getObjectId(),count,i);
+                                            break;
+                                        }
+                                        if (i==shopCars.get(0).getGoodsId().size()-1) {
+                                            update(shopCars.get(0).getObjectId(), count, objectId);
+                                        }
                                     }
                                 }
-
                             } else {
                                 newUpdate();
                             }
                         } else {
-                            Log.e("BMOB", e.toString());
+                            Log.e("BMOB", e.getMessage());
                         }
                     }
                 });
 
 
-                /*new BmobQuery<ShopCar>().doSQLQuery(bql, new SQLQueryListener<ShopCar>() {
 
-                    @Override
-                    public void done(BmobQueryResult<ShopCar> result, BmobException e) {
-                        if (e == null) {
-                            List<ShopCar> shopCars = (List<ShopCar>) result.getResults();
-                            if (shopCars!=null && shopCars.size()>0) {
-
-                                for (int i=0;i<shopCars.get(0).getGoodsId().size();i++) {
-                                    if (shopCars.get(0).getGoodsId().get(i).equals(objectId)) {
-                                        count += Integer.parseInt(shopCars.get(0).getCount().get(i));
-                                        updateAdd(shopCars.get(0).getObjectId(),count,i);
-                                        break;
-                                    }
-                                    if (i==shopCars.get(0).getGoodsId().size()-1) {
-                                        update(shopCars.get(0).getObjectId(), count, objectId);
-                                    }
-                                }
-
-                            } else {
-                                newUpdate();
-                            }
-                        } else {
-                            Log.i("smile", "错误码：" + e.getErrorCode() + "，错误描述：" + e.getMessage());
-                        }
-                    }
-                });*/
                 break;
             case R.id.toolbar:
                 finish();
@@ -209,6 +205,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
+
 
     public void update(String objectId, int count, String goodsId) {
         ShopCar shopCar = new ShopCar();
@@ -259,7 +256,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
                 if (e == null) {
                     Toast.makeText(DetailActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d(TAG, "done: fail");
+                    Log.i(TAG, "done: fail" + e.getMessage());
                 }
             }
         });

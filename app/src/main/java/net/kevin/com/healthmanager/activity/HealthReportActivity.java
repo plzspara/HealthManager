@@ -13,7 +13,7 @@ import cn.bmob.v3.BmobUser;
 
 public class HealthReportActivity extends AppCompatActivity {
 
-    private int stepCount = 0,weight=0;
+    private int stepCount = 0;
     private TextView show_length,show_cal,show_step,show_weight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

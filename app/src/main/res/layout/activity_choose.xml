@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bg_src_morning"
     tools:context=".activity.ChooseActivity">
 
     <Button
@@ -25,9 +26,9 @@
         android:id="@+id/choose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="相册"
-        android:background="@color/yellow"
+        android:layout_marginTop="200dp"
+        android:text="从相册选择图片"
+        android:background="@drawable/sel_btn_yellow_alpha_44"
         android:textSize="20sp"
         />
 

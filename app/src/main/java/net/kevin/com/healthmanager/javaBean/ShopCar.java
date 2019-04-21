@@ -12,7 +12,6 @@ import cn.bmob.v3.BmobObject;
  */
 public class ShopCar extends BmobObject {
 
-    //private String objectId;
     private String shopName;
     private String userId;
     private List<String> count;
@@ -72,14 +71,22 @@ public class ShopCar extends BmobObject {
 
 
 
-    public static class shop{
-        private String objectId;
+    public static class shop extends BmobObject{
         private String goodImage;
         private int stocks;
         private Double price;
         private String goodsName;
         private String shopName;
+        private int sales;
         private Boolean isSelect_Goods = false;
+
+        public int getSales() {
+            return sales;
+        }
+
+        public void setSales(int sales) {
+            this.sales = sales;
+        }
 
         public String getShopName() {
             return shopName;
@@ -87,14 +94,6 @@ public class ShopCar extends BmobObject {
 
         public void setShopName(String shopName) {
             this.shopName = shopName;
-        }
-
-        public String getObjectId() {
-            return objectId;
-        }
-
-        public void setObjectId(String objectId) {
-            this.objectId = objectId;
         }
 
         public String getGoodImage() {

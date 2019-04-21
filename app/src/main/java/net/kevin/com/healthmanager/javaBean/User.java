@@ -13,13 +13,31 @@ public class User extends BmobUser {
     private String gender;
     private String year;
     private String headImage;
-    private double weight;
+    private String weight;
+    private String name;
+    private String address;
 
-    public double getWeight() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 

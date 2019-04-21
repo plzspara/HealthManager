@@ -53,12 +53,6 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("url", url);
-                intent.putExtra("goodsName", goodsName);
-                intent.putExtra("price", price);
-                intent.putExtra("shopName", shopName);
-                intent.putExtra("sales", sales);
-                intent.putExtra("stocks", stocks);
                 intent.putExtra("objectId",objectId);
                 context.startActivity(intent);
             }

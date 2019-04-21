@@ -44,6 +44,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.ReceiverActivity"></activity>
         <activity android:name=".activity.StepHistoryActivity" />
         <activity android:name=".activity.HealthReportActivity" />
         <activity android:name=".activity.UpdateNickNameActivity" />

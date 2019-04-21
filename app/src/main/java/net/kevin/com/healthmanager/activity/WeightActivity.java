@@ -41,13 +41,17 @@ public class WeightActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_determine:
+                double userWeight = 0;
                 String weight = edit_weight.getText().toString();
                 String height = edit_height.getText().toString();
-                double userWeight = BmobUser.getCurrentUser(User.class).getWeight();
+                if (BmobUser.getCurrentUser(User.class).getWeight()!=null) {
+                    userWeight = Double.parseDouble(BmobUser.getCurrentUser(User.class).getWeight());
+                }
+
                 String info = "";
                 if (!weight.isEmpty() && !height.isEmpty()) {
                     double d_weight = Double.parseDouble(weight);
-                    double d_height = Double.parseDouble(height);
+                    double d_height = Double.parseDouble(height)/100;
                     if (userWeight > 0) {
                         if (userWeight > d_weight) {
                             info = ",与上次测量相比减少了" + (userWeight - d_weight) + "kg";
@@ -78,7 +82,7 @@ public class WeightActivity extends Activity implements View.OnClickListener {
                     builder.show();
 
                     User user = new User();
-                    user.setWeight(d_weight);
+                    user.setWeight(d_weight+"");
                     user.update(BmobUser.getCurrentUser(User.class).getObjectId(), new UpdateListener() {
                         @Override
                         public void done(BmobException e) {

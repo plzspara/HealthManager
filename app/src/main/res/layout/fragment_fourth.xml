@@ -147,15 +147,15 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/ic_directions_run"
+                    android:background="@drawable/ic_history"
                     android:layout_gravity="center"
                     />
 
                 <TextView
-                    android:id="@+id/step_plan"
+                    android:id="@+id/history"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="运动计划"
+                    android:text="运动历史"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="#000000"
@@ -172,15 +172,15 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/ic_history"
+                    android:background="@drawable/ic_directions_run"
                     android:layout_gravity="center"
                     />
 
                 <TextView
-                    android:id="@+id/history"
+                    android:id="@+id/step_plan"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="运动历史"
+                    android:text="运动计划"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="#000000"

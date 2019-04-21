@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:layout_marginTop="100dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                     android:gravity="center_vertical"
                     android:text="每日锻炼步数"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="25sp" />
 
                 <EditText
                     android:id="@+id/tv_step_number"
@@ -101,7 +101,7 @@
                     android:gravity="center_vertical|right"
                     android:text="7000"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="25sp" />
             </LinearLayout>
 
             <ImageView
@@ -113,7 +113,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -145,7 +146,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"

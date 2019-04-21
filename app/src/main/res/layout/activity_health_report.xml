@@ -32,7 +32,7 @@
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:background="@mipmap/sport"/>
+            android:background="@mipmap/sport" />
 
         <TextView
             android:id="@+id/show_length"
@@ -63,7 +63,7 @@
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:background="@mipmap/weight"/>
+            android:background="@drawable/lose_weight"/>
 
         <TextView
             android:id="@+id/show_weight"

@@ -8,13 +8,51 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <net.kevin.com.healthmanager.step.StepArcView
-        android:id="@+id/step"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/hbue"/>
+
+    <FrameLayout
         android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:paddingTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center">
+
+        <net.kevin.com.healthmanager.step.StepArcView
+            android:id="@+id/step"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="30sp"
+            android:textColor="@color/red"
+            android:layout_gravity="bottom"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/tv_plan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="30sp"
+                android:textColor="@color/red"
+                android:layout_alignParentRight="true"
+                />
+
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
 
     <Button
         android:id="@+id/start_running"
@@ -23,6 +61,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:background="@drawable/sel_btn_yellow_alpha_44"
+        android:layout_marginTop="20dp"
         android:text="开始运动"
         android:textColor="@color/black"
         />

@@ -61,7 +61,6 @@ public class FourthFragment extends Fragment implements View.OnClickListener{
         // Required empty public constructor
     }
 
-    @SuppressLint("HandlerLeak")
     @Override
     public void onResume() {
         super.onResume();

@@ -118,7 +118,7 @@ public class SecondFragment extends Fragment {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Log.e(TAG, "onFailure: " + e.getMessage() );
             }
 
             @Override
@@ -151,9 +151,8 @@ public class SecondFragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e(TAG, "onResponse: " + e.getMessage() );
                 }
-
-
             }
         });
     }

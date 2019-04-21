@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import net.kevin.com.healthmanager.R;
@@ -36,6 +36,7 @@ public class FirstFragment extends Fragment {
     private StepArcView stepArcView;
     private SharedPreferences sharedPreferences;
     private Button btn_start,btn_weight;
+    private TextView tv_plan;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +47,7 @@ public class FirstFragment extends Fragment {
         stepArcView = (StepArcView) view.findViewById(R.id.step);
         btn_start = (Button) view.findViewById(R.id.start_running);
         btn_weight = (Button) view.findViewById(R.id.weight);
+        tv_plan = (TextView) view.findViewById(R.id.tv_plan);
 
         stepArcView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +95,7 @@ public class FirstFragment extends Fragment {
         sharedPreferences = getActivity().getSharedPreferences("runStep", Context.MODE_PRIVATE);
         String time = sharedPreferences.getString("time","2018");
         int stepPlan = sharedPreferences.getInt("plan",10000);
+        tv_plan.setText(stepPlan+"");
         if (time.equals(currentTime)){
             int step = sharedPreferences.getInt("step",0);
             if (user.getStepDate()!=null && currentTime.equals(user.getStepDate().get(user.getStepDate().size()-1))) {

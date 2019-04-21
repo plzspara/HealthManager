@@ -15,12 +15,23 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import net.kevin.com.healthmanager.R;
+import net.kevin.com.healthmanager.javaBean.Order;
 import net.kevin.com.healthmanager.javaBean.ShopCar;
+import net.kevin.com.healthmanager.javaBean.User;
 import net.kevin.com.healthmanager.util.ToastUtil;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import cn.bmob.v3.BmobBatch;
+import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BatchResult;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListListener;
 
 
 /**
@@ -34,7 +45,6 @@ public class ShoppingCarAdapter extends BaseExpandableListAdapter {
     private final ImageView ivSelectAll;
     private final Button btnOrder;
     private final Button btnDelete;
-    private final RelativeLayout rlTotalPrice;
     private final TextView tvTotalPrice;
     private List<ShopCar> data;
     private boolean isSelectAll = false;
@@ -52,7 +62,6 @@ public class ShoppingCarAdapter extends BaseExpandableListAdapter {
         this.ivSelectAll = ivSelectAll;
         this.btnOrder = btnOrder;
         this.btnDelete = btnDelete;
-        this.rlTotalPrice = rlTotalPrice;
         this.tvTotalPrice = tvTotalPrice;
     }
 
@@ -234,28 +243,68 @@ public class ShoppingCarAdapter extends BaseExpandableListAdapter {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //创建临时的List，用于存储被选中的商品
-                List<ShopCar.shop> temp = new ArrayList<>();
-                for (int i = 0; i < data.size(); i++) {
-                    List<ShopCar.shop> goods = data.get(i).getShops();
-                    for (int y = 0; y < goods.size(); y++) {
-                        ShopCar.shop goodsBean = goods.get(y);
-                        boolean isSelect = goodsBean.getSelect_Goods();
-                        if (isSelect) {
-                            temp.add(goodsBean);
+                List<BmobObject> orders = new ArrayList<>();
+                User user = BmobUser.getCurrentUser(User.class);
+
+                //如果有收货人信息
+                if (user.getAddress() != null) {
+                    //创建临时的List，用于存储被选中的商品
+                    for (int i = 0; i < data.size(); i++) {
+                        List<ShopCar.shop> goods = data.get(i).getShops();
+                        for (int y = 0; y < goods.size(); y++) {
+                            ShopCar.shop goodsBean = goods.get(y);
+                            boolean isSelect = goodsBean.getSelect_Goods();
+                            if (isSelect) {
+                                Date date = new Date(System.currentTimeMillis());
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                String currentTime = sdf.format(date);
+                                Order order = new Order();
+                                order.setAddress(user.getAddress());
+                                order.setCount(Integer.parseInt(data.get(i).getCount().get(y)));
+                                order.setGoodsId(goodsBean.getObjectId());
+                                order.setOrderTime(currentTime);
+                                order.setPhoneNumber(user.getMobilePhoneNumber());
+                                order.setUserId(user.getObjectId());
+                                order.setIfGet(false);
+                                order.setGoodsName(goodsBean.getGoodsName());
+                                orders.add(order);
+                            }
                         }
                     }
+
+                    //如果有被选中的
+                    if (orders != null && orders.size() > 0) {
+                        new BmobBatch().insertBatch(orders).doBatch(new QueryListListener<BatchResult>() {
+
+                            @Override
+                            public void done(List<BatchResult> o, BmobException e) {
+                                if(e==null){
+                                    for(int i=0;i<o.size();i++){
+                                        BatchResult result = o.get(i);
+                                        BmobException ex =result.getError();
+                                        if(ex==null){
+                                            Toast.makeText(context,"购买成功",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Log.e("ERROR","第"+i+"个数据批量添加失败："+ex.getMessage()+","+ex.getErrorCode());
+                                        }
+                                        if (mDeleteListener != null) {
+                                            mDeleteListener.onBuy(data);
+                                        }
+                                    }
+                                }else{
+                                    Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
+                                }
+                            }
+                        });
+
+                    } else {
+                        ToastUtil.makeText(context, "请选择要购买的商品");
+                    }
+
+                } else {
+                    Toast.makeText(context,"没有收货信息，请输入收货人信息",Toast.LENGTH_SHORT).show();
                 }
 
-                if (temp != null && temp.size() > 0) {//如果有被选中的
-                    /**
-                     * 实际开发中，如果有被选中的商品，
-                     * 则跳转到确认订单页面，完成后续订单流程。
-                     */
-                    ToastUtil.makeText(context, "跳转到确认订单页面，完成后续订单流程");
-                } else {
-                    ToastUtil.makeText(context, "请选择要购买的商品");
-                }
             }
         });
 
@@ -331,9 +380,14 @@ public class ShoppingCarAdapter extends BaseExpandableListAdapter {
         String goods_name = goodsBean.getGoodsName();
         //商品价格
         Double goods_price = goodsBean.getPrice();
-
+        int i  = 0 ;
+        for (;i<data.get(groupPosition).getGoodsId().size();i++) {
+            if (goods_id.equals(data.get(groupPosition).getGoodsId().get(i))) {
+                break;
+            }
+        }
         //商品数量
-        int goods_num = Integer.parseInt(data.get(groupPosition).getCount().get(childPosition));
+        int goods_num = Integer.parseInt(data.get(groupPosition).getCount().get(i));
         //商品是否被选中
         final boolean isSelect = goodsBean.getSelect_Goods();
 
@@ -464,10 +518,13 @@ public class ShoppingCarAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
-    //删除的回调
+    //购买和删除的回调
     public interface OnDeleteListener {
         void onDelete(List<ShopCar> shopCars);
+        void onBuy(List<ShopCar> shopCars);
     }
+
+
 
     public void setOnDeleteListener(OnDeleteListener listener) {
         mDeleteListener = listener;

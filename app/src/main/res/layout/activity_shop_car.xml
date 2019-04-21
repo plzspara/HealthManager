@@ -53,6 +53,120 @@
                 android:background="#cccccc" />
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/llpoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#FFFFFF">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="无收货信息请点击编辑"
+                android:textSize="20sp"
+                android:textColor="@color/red"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/point"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ic_direction_right"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/receiver_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="收货信息: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/receiver_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="老潘"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/receiver_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12345678901"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:layout_alignParentRight="true"
+                            />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/receiver_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="湖北省武汉市江夏区藏龙岛开发区杨桥湖大道"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_update"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_direction_right"
+                android:layout_gravity="center"/>
+
+
+
+        </LinearLayout>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+
+
         <ExpandableListView
             android:id="@+id/elv_shopping_car"
             android:layout_width="match_parent"
@@ -102,7 +216,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:background="#ee1d23"
-                android:text="去结算"
+                android:text="立即购买"
                 android:textColor="#ffffff"
                 android:textSize="16dp"
                 android:visibility="visible" />
