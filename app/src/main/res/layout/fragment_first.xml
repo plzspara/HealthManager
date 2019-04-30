@@ -9,9 +9,10 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/hbue"/>
+        android:src="@drawable/hbue"
+        android:layout_gravity="center"/>
 
     <FrameLayout
         android:layout_width="200dp"

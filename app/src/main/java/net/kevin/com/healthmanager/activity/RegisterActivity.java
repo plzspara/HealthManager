@@ -134,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             } else {
-                                Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "此手机号已被注册", Toast.LENGTH_SHORT).show();
                                 Log.d(TAG, "user.update.done: " + e.getMessage());
                             }
                         }

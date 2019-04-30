@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -18,11 +19,6 @@ import android.widget.Toast;
 
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
-import com.tencent.connect.UserInfo;
-import com.tencent.connect.auth.QQToken;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
 
 import net.kevin.com.healthmanager.R;
 import net.kevin.com.healthmanager.fragment.FirstFragment;
@@ -31,18 +27,16 @@ import net.kevin.com.healthmanager.fragment.SecondFragment;
 import net.kevin.com.healthmanager.adapter.ViewPagerAdapter;
 import net.kevin.com.healthmanager.fragment.ThirdFragment;
 import net.kevin.com.healthmanager.javaBean.User;
-import net.kevin.com.healthmanager.step.utils.DbUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FetchUserInfoListener;
-import cn.bmob.v3.listener.UpdateListener;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -53,6 +47,8 @@ public class MainActivity extends AppCompatActivity  {
     private MenuItem menuItem;
 
     private SDKReceiver mReceiver;
+
+    private final String appKey = "57b639f8a7a4b768d7e7add7329bcf34";
 
     /**
      * 构造广播监听类，监听 SDK key 验证以及网络异常广播
@@ -88,6 +84,7 @@ public class MainActivity extends AppCompatActivity  {
         iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
         mReceiver = new SDKReceiver();
         registerReceiver(mReceiver, iFilter);
+        Bmob.initialize(this, appKey);
         BmobUser.fetchUserInfo(new FetchUserInfoListener<BmobUser>() {
             @Override
             public void done(BmobUser user, BmobException e) {
@@ -185,5 +182,22 @@ public class MainActivity extends AppCompatActivity  {
         unregisterReceiver(mReceiver);
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.d("tag", "onRequestPermissionsResult: ");
+        switch (requestCode) {
+            case 1:
+                Log.d("tag", "onRequestPermissionsResult: switch");
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent intent = new Intent(MainActivity.this, DynamicDemo.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this,"没有定位权限！",Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                break;
+        }
+    }
 }
