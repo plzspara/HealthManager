@@ -38,15 +38,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Bmob.initialize(this, "57b639f8a7a4b768d7e7add7329bcf34");
-
         edit_phone = (EditText) findViewById(R.id.edit_phone);
         edit_password = (EditText) findViewById(R.id.edit_password);
         edit_verifyCode = (EditText) findViewById(R.id.edit_vertify_code);
         btn_submit = (Button) findViewById(R.id.btn_submit);
         btn_get = (Button) findViewById(R.id.btn_get);
         text_goLogin = (TextView) findViewById(R.id.txt_go_login);
-
-
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

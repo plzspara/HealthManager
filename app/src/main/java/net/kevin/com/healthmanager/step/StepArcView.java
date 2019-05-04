@@ -62,6 +62,7 @@ public class StepArcView extends View {
     }
 
 
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -83,7 +84,7 @@ public class StepArcView extends View {
     /**
      * 1.绘制总步数的黄色圆弧
      *
-     * @param canvas 画笔
+     * @param canvas 画布
      * @param rectF  参考的矩形
      */
     private void drawArcYellow(Canvas canvas, RectF rectF) {
@@ -192,8 +193,11 @@ public class StepArcView extends View {
      * @param currentCounts 所走步数
      */
     public void setCurrentCount(int totalStepNum, int currentCounts) {
-        /**如果当前走的步数超过总步数则圆弧还是270度，不能成为园*/
+        /**如果当前走的步数超过总步数则圆弧还是270度，不能成为圆*/
+        //tempStep为存放显示步数的值
+        int tempStep = currentCounts;
         if (currentCounts > totalStepNum) {
+            //确保最大圆弧为270度
             currentCounts = totalStepNum;
         }
 
@@ -209,8 +213,8 @@ public class StepArcView extends View {
         /**开始执行动画*/
         setAnimation(previousAngleLength, currentAngleLength, animationLength);
 
-        stepNumber = String.valueOf(currentCounts);
-        setTextSize(currentCounts);
+        stepNumber = String.valueOf(tempStep);
+        setTextSize(tempStep);
     }
 
     /**
