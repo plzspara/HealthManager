@@ -35,7 +35,7 @@ import cn.bmob.v3.BmobUser;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ *首页
  */
 public class FirstFragment extends Fragment {
 

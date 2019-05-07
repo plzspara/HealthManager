@@ -42,6 +42,7 @@ import cn.bmob.v3.listener.UpdateListener;
 
 
 /**
+ * 购物车
  * 主要功能：1.刷新数据；
  * 2.单选、全选；
  * 3.合计；

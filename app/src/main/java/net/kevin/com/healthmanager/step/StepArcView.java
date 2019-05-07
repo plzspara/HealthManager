@@ -13,7 +13,7 @@ import android.view.View;
 import net.kevin.com.healthmanager.R;
 
 /**
- * Created by DylanAndroid on 2016/5/26.
+ *
  * 显示步数的圆弧
  */
 public class StepArcView extends View {

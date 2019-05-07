@@ -36,7 +36,7 @@ import net.kevin.com.healthmanager.javaBean.User;
 import cn.bmob.v3.BmobUser;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 月运动历史fragment
  */
 public class MonthFragment extends Fragment {
 
@@ -144,14 +144,6 @@ public class MonthFragment extends Fragment {
         ArrayList<BarEntry> values = new ArrayList<>();
 
         for (int i = (int) start; i < start + count; i++) {
-            /*float val = (float) (Math.random() * (range + 1));
-
-            if (Math.random() * 100 < 25) {
-                Log.d("tag", "setData: " + Math.random());
-                values.add(new BarEntry(i, val, getResources().getDrawable(R.drawable.star)));
-            } else {
-                values.add(new BarEntry(i, val));
-            }*/
 
 
             Calendar cal = Calendar.getInstance();

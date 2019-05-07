@@ -38,7 +38,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-
+/**
+ * 新闻页
+ */
 public class SecondFragment extends Fragment {
 
     private static final String TAG = "BlankFragment";

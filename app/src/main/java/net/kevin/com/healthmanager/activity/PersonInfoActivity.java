@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 import net.kevin.com.healthmanager.R;
 
+
+/**
+ * 用户个人资料修改
+ */
 public class PersonInfoActivity extends AppCompatActivity {
 
     private TextView head,nick,password,receiver_info;

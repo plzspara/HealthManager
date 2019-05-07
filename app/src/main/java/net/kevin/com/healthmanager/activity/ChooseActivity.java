@@ -35,6 +35,9 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
+/**
+ * 用户头像更换，从相册中选择
+ */
 public class ChooseActivity extends AppCompatActivity {
 
     private static final String TAG = "ChooseActivity";

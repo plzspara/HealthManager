@@ -37,7 +37,7 @@ import java.util.List;
 import cn.bmob.v3.BmobUser;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 周运动历史
  */
 public class WeekFragment extends Fragment {
 

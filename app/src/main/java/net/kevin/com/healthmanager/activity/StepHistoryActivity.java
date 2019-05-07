@@ -11,6 +11,9 @@ import net.kevin.com.healthmanager.R;
 import net.kevin.com.healthmanager.fragment.MonthFragment;
 import net.kevin.com.healthmanager.fragment.WeekFragment;
 
+/**
+ * 用户运动周和月历史
+ */
 public class StepHistoryActivity extends AppCompatActivity {
 
     @Override

@@ -22,6 +22,10 @@ import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
+
+/**
+ * 用户注册
+ */
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
     private EditText edit_phone, edit_verifyCode, edit_password;

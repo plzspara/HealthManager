@@ -26,7 +26,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 商城页
  */
 public class ThirdFragment extends Fragment {
 

@@ -52,14 +52,12 @@
         <activity android:name=".activity.ChooseActivity" />
         <activity android:name=".activity.PersonInfoActivity" />
         <activity android:name=".activity.ShopCarActivity" />
-        <activity android:name=".activity.TestActivity" />
         <activity android:name=".activity.WeightActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".activity.StepActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
@@ -81,11 +79,6 @@
             android:process=".remote" />
 
         <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.PasswordActivity" />
-        <activity
-            android:name=".activity.StepActivity"
-            tools:ignore="DuplicateActivity" />
-        <activity android:name=".activity.HistoryActivity" />
         <activity android:name=".activity.SetPlanActivity" />
         <activity android:name=".activity.WebActivity" />
         <activity

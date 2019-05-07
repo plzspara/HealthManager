@@ -15,9 +15,7 @@ import net.kevin.com.healthmanager.R;
 import java.text.DecimalFormat;
 
 /**
- * Custom implementation of the MarkerView.
- *
- * @author Philipp Jahoda
+ * xy轴数据显示视图
  */
 @SuppressLint("ViewConstructor")
 public class XYMarkerView extends MarkerView {

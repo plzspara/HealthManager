@@ -22,6 +22,7 @@ import java.util.List;
 
 /*
  *@author panlister
+ * 新闻适配器
  */
 public class MulRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int NEW_SIMPLE_TYPE = 0;//单图文模式

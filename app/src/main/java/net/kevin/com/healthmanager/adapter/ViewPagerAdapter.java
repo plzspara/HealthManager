@@ -8,6 +8,7 @@ import java.util.List;
 
 /*
  *@author panlister
+ * 翻页效果适配器
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> list;

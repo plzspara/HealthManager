@@ -33,6 +33,9 @@ import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
+/**
+ * 商品详情页面
+ */
 public class DetailActivity extends Activity implements View.OnClickListener {
 
     private ImageView goodsImage, add, sub;

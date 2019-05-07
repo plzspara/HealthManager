@@ -27,7 +27,7 @@ import java.util.Locale;
 
 
 /**
- * Created by yuandl on 2016-10-18.
+ *运动计划制定
  */
 
 public class SetPlanActivity extends AppCompatActivity implements View.OnClickListener {

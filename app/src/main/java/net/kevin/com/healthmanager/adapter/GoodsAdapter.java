@@ -19,6 +19,7 @@ import java.util.List;
 
 /*
  *@author panlister
+ * 商品适配器
  */
 public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.ViewHolder> {
     private static final String TAG = "GoodsAdapter";

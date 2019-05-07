@@ -19,6 +19,9 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
 
+/**
+ * 体重管理
+ */
 public class WeightActivity extends Activity implements View.OnClickListener {
 
     private EditText edit_weight,edit_height;

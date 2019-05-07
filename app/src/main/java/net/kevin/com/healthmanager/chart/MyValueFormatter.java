@@ -6,6 +6,9 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.text.DecimalFormat;
 
+/**
+ * 步数格式器
+ */
 public class MyValueFormatter extends ValueFormatter {
 
     private final DecimalFormat mFormat;

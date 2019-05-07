@@ -7,6 +7,9 @@ import android.webkit.WebView;
 
 import net.kevin.com.healthmanager.R;
 
+/**
+ * 新闻详情页
+ */
 public class WebActivity extends AppCompatActivity {
 
     @Override

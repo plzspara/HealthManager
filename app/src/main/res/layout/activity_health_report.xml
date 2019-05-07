@@ -11,6 +11,14 @@
         android:orientation="vertical"
         android:layout_marginTop="30dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="本月的健康报告"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/red"/>
+
 
         <ImageView
             android:layout_width="300dp"

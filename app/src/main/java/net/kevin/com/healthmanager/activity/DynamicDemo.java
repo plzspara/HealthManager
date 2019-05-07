@@ -58,8 +58,7 @@ import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
- * 此demo实现时时动态画运动轨迹
- * author zhh
+ * 实时动态画运动轨迹，显示步数
  */
 public class DynamicDemo extends Activity implements SensorEventListener {
     private static final String TAG = "DynamicDemo";

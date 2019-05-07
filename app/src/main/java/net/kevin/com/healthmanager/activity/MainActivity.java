@@ -38,7 +38,9 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FetchUserInfoListener;
 
-
+/**
+ * 主页面，完成用户数据同步，请求权限处理，显示四个fragment
+ */
 public class MainActivity extends AppCompatActivity  {
     private static final String TAG = "MainActivity";
     private BottomNavigationView bottomNavigationView;

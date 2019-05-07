@@ -17,6 +17,9 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
 
+/**
+ * 用户昵称和性别更新
+ */
 public class UpdateNickNameActivity extends AppCompatActivity {
 
 
