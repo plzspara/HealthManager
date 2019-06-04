@@ -9,25 +9,25 @@
 
 ## 功能实现
 ### 用户模块
-https://github.com/plzspara/image/raw/master/healthManager/login.jpg
-https://github.com/plzspara/image/raw/master/healthManager/register.jpg
-https://github.com/plzspara/image/raw/master/healthManager/personal.jpg
-https://github.com/plzspara/image/raw/master/healthManager/week_sportHis.jpg
-https://github.com/plzspara/image/raw/master/healthManager/month_sportHis.jpg
-https://github.com/plzspara/image/raw/master/healthManager/healthReport.jpg
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/login.jpg)
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/register.jpg)
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/personal.jpg)
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/week_sportHis.jpg)
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/month_sportHis.jpg)
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/healthReport.jpg)
 
 ### 健康管理模块
-https://github.com/plzspara/image/raw/master/healthManager/run.jpg
-https://github.com/plzspara/image/raw/master/healthManager/weight.jpg
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/run.jpg)
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/weight.jpg)
 
 ### 体育新闻模块
-https://github.com/plzspara/image/raw/master/healthManager/newsList.jpg
-https://github.com/plzspara/image/raw/master/healthManager/news.jpg
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/newsList.jpg)
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/news.jpg)
 
 ### 商城模块
-https://github.com/plzspara/image/raw/master/healthManager/goods.jpg
-https://github.com/plzspara/image/raw/master/healthManager/goodsDe.jpg
-https://github.com/plzspara/image/raw/master/healthManager/shopCar.jpg
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/goods.jpg?token=AIBNGWJRCSKUGGECXEDQ4RC46XHQW)
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/goodsDe.jpg)
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/shopCar.jpg)
 
 
 ## 关键技术
