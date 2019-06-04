@@ -9,26 +9,26 @@
 
 ## 功能实现
 ### 用户模块
-![登录](https://raw.githubusercontent.com/plzspara/image/master/healthManager/login.jpg?token=AIBNGWLLU7VQGW2FLB6AAS246XLEU)
-![注册](https://raw.githubusercontent.com/plzspara/image/master/healthManager/register.jpg?token=AIBNGWK6WABCDH3AAX4KXVS46XKSC)
-![个人](https://raw.githubusercontent.com/plzspara/image/master/healthManager/personal.jpg?token=AIBNGWKRGKKMF3SBDEWS42K46XKMW)
-![个人资料](https://raw.githubusercontent.com/plzspara/image/master/healthManager/receiver.jpg?token=AIBNGWNS3JZWJB5WVAOJ6N246XK5Y)
-![周运动历史](https://raw.githubusercontent.com/plzspara/image/master/healthManager/week_sportHis.jpg?token=AIBNGWILK6XWUUMDNTCXB7C46XKVE)
-![月运动历史](https://github.com/plzspara/image/blob/master/healthManager/login.jpg?raw=true)
+![登录](https://raw.githubusercontent.com/plzspara/image/master/healthManager/login.jpg)
+![注册](https://raw.githubusercontent.com/plzspara/image/master/healthManager/register.jpg)
+![个人](https://raw.githubusercontent.com/plzspara/image/master/healthManager/personal.jpg)
+![个人资料](https://raw.githubusercontent.com/plzspara/image/master/healthManager/receiver.jpg)
+![周运动历史](https://raw.githubusercontent.com/plzspara/image/master/healthManager/week_sportHis.jpg)
+![月运动历史](https://github.com/plzspara/image/blob/master/healthManager/login.jpg)
 ![运动报告](https://raw.githubusercontent.com/plzspara/image/master/healthManager/healthReport.jpg)
 
 ### 健康管理模块
-![运动](https://raw.githubusercontent.com/plzspara/image/master/healthManager/run.jpg?token=AIBNGWOEUOZ5DEPGGXQZURC46XKTC)
-![体重管理](https://raw.githubusercontent.com/plzspara/image/master/healthManager/weight.jpg?token=AIBNGWMZ5BTL5M3DS6RIEHC46XKWM)
+![运动](https://raw.githubusercontent.com/plzspara/image/master/healthManager/run.jpg)
+![体重管理](https://raw.githubusercontent.com/plzspara/image/master/healthManager/weight.jpg)
 
 ### 体育新闻模块
-![新闻列表](https://raw.githubusercontent.com/plzspara/image/master/healthManager/newsList.jpg?token=AIBNGWOAN45THNV456DPNTK46XKL4)
-![新闻](https://raw.githubusercontent.com/plzspara/image/master/healthManager/news.jpg?token=AIBNGWL5WKUE4N6IRLOHJ3C46XKK4)
+![新闻列表](https://raw.githubusercontent.com/plzspara/image/master/healthManager/newsList.jpg)
+![新闻](https://raw.githubusercontent.com/plzspara/image/master/healthManager/news.jpg)
 
 ### 商城模块
-![商品列表](https://raw.githubusercontent.com/plzspara/image/master/healthManager/goods.jpg?token=AIBNGWNL4SZW4EIJX3LWGOK46XJ2G)
-![商品详情](https://raw.githubusercontent.com/plzspara/image/master/healthManager/goodsDe.jpg?token=AIBNGWOM7YFWHUI5XV3RNMC46XKCC)
-![购物车](https://raw.githubusercontent.com/plzspara/image/master/healthManager/shopCar.jpg?token=AIBNGWNAZOC55XA4SWSLDEK46XKUG)
+![商品列表](https://raw.githubusercontent.com/plzspara/image/master/healthManager/goods.jpg)
+![商品详情](https://raw.githubusercontent.com/plzspara/image/master/healthManager/goodsDe.jpg)
+![购物车](https://raw.githubusercontent.com/plzspara/image/master/healthManager/shopCar.jpg)
 
 
 ## 关键技术
