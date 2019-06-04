@@ -9,7 +9,7 @@
 
 ## 功能实现
 ### 用户模块
-![Image text](https://github.com/plzspara/image/raw/master/healthManager/login.jpg?token=AIBNGWMZGLJ6TZVEET4JYCC46XH2Y)
+![Image text](https://github.com/plzspara/image/raw/master/healthManager/login.jpg)
 ![Image text](https://github.com/plzspara/image/raw/master/healthManager/register.jpg?token=AIBNGWO44LYTSBDMKFHYSVS46XIE4)
 ![Image text](https://github.com/plzspara/image/raw/master/healthManager/personal.jpg?token=AIBNGWKQJEELK3HJDMAVFYS46XIDK)
 ![Image text](https://github.com/plzspara/image/raw/master/healthManager/week_sportHis.jpg?token=AIBNGWLMGSPP4WLOMPDJMGC46XIIK)
