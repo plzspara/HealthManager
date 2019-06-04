@@ -14,8 +14,8 @@
 ![个人](https://raw.githubusercontent.com/plzspara/image/master/healthManager/personal.jpg?token=AIBNGWKRGKKMF3SBDEWS42K46XKMW)
 ![个人资料](https://raw.githubusercontent.com/plzspara/image/master/healthManager/receiver.jpg?token=AIBNGWNS3JZWJB5WVAOJ6N246XK5Y)
 ![周运动历史](https://raw.githubusercontent.com/plzspara/image/master/healthManager/week_sportHis.jpg?token=AIBNGWILK6XWUUMDNTCXB7C46XKVE)
-![月运动历史](https://raw.githubusercontent.com/plzspara/image/master/healthManager/month_sportHis.jpg?token=AIBNGWN2COS2KDOK5DYAEKK46XKJO)
-![运动报告](https://raw.githubusercontent.com/plzspara/image/master/healthManager/healthReport.jpg?token=AIBNGWIJE6DHGPAZUIKX2HC46XKDQ)
+![月运动历史](https://raw.githubusercontent.com/plzspara/image/master/healthManager/month_sportHis.jpg)
+![运动报告](https://raw.githubusercontent.com/plzspara/image/master/healthManager/healthReport.jpg)
 
 ### 健康管理模块
 ![运动](https://raw.githubusercontent.com/plzspara/image/master/healthManager/run.jpg?token=AIBNGWOEUOZ5DEPGGXQZURC46XKTC)
