@@ -12,7 +12,7 @@
 ![登录](https://raw.githubusercontent.com/plzspara/image/master/healthManager/login.jpg?token=AIBNGWOBX5MS6JTILEVHH5K46XKIU)
 ![注册](https://raw.githubusercontent.com/plzspara/image/master/healthManager/register.jpg?token=AIBNGWK6WABCDH3AAX4KXVS46XKSC)
 ![个人](https://raw.githubusercontent.com/plzspara/image/master/healthManager/personal.jpg?token=AIBNGWKRGKKMF3SBDEWS42K46XKMW)
-![个人资料](![个人](https://raw.githubusercontent.com/plzspara/image/master/healthManager/personal.jpg?token=AIBNGWKRGKKMF3SBDEWS42K46XKMW)
+![个人资料](https://raw.githubusercontent.com/plzspara/image/master/healthManager/receiver.jpg?token=AIBNGWNS3JZWJB5WVAOJ6N246XK5Y)
 ![周运动历史](https://raw.githubusercontent.com/plzspara/image/master/healthManager/week_sportHis.jpg?token=AIBNGWILK6XWUUMDNTCXB7C46XKVE)
 ![月运动历史](https://raw.githubusercontent.com/plzspara/image/master/healthManager/month_sportHis.jpg?token=AIBNGWN2COS2KDOK5DYAEKK46XKJO)
 ![运动报告](https://raw.githubusercontent.com/plzspara/image/master/healthManager/healthReport.jpg?token=AIBNGWIJE6DHGPAZUIKX2HC46XKDQ)
