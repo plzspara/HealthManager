@@ -7,6 +7,8 @@
 - 健康资讯模块：推送体育、运动和饮食等与健康相关的文章及新闻。
 - 健康商城模块：展示，推荐和售卖与健康管理相关的商品，并实现了购物车功能。
 
+
+
 ## 功能实现
 ### 用户模块
 ![登录](https://raw.githubusercontent.com/plzspara/image/master/healthManager/login.jpg)
@@ -30,6 +32,8 @@
 ![商品列表](https://raw.githubusercontent.com/plzspara/image/master/healthManager/goods.jpg)
 ![商品详情](https://raw.githubusercontent.com/plzspara/image/master/healthManager/goodsDe.jpg)
 ![购物车](https://raw.githubusercontent.com/plzspara/image/master/healthManager/shopCar.jpg)
+
+
 
 
 ## 关键技术
