@@ -14,10 +14,11 @@
 ![个人](https://raw.githubusercontent.com/plzspara/image/master/healthManager/personal.jpg)
 ![个人资料](https://raw.githubusercontent.com/plzspara/image/master/healthManager/receiver.jpg)
 ![周运动历史](https://raw.githubusercontent.com/plzspara/image/master/healthManager/week_sportHis.jpg)
-![月运动历史](https://github.com/plzspara/image/blob/master/healthManager/login.jpg)
+![月运动历史](https://raw.githubusercontent.com/plzspara/image/master/healthManager/month_sportHis.jpg)
 ![运动报告](https://raw.githubusercontent.com/plzspara/image/master/healthManager/healthReport.jpg)
 
 ### 健康管理模块
+![运动](https://raw.githubusercontent.com/plzspara/image/master/healthManager/main.jpg)
 ![运动](https://raw.githubusercontent.com/plzspara/image/master/healthManager/run.jpg)
 ![体重管理](https://raw.githubusercontent.com/plzspara/image/master/healthManager/weight.jpg)
 
