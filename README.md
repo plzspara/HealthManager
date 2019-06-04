@@ -25,7 +25,7 @@
 ![新闻](https://github.com/plzspara/image/raw/master/healthManager/news.jpg?token=AIBNGWNOYD2LN6E3OQ25UP246XH7E)
 
 ### 商城模块
-![商品列表](https://github.com/plzspara/image/raw/master/healthManager/goods.jpg?token=AIBNGWJRCSKUGGECXEDQ4RC46XHQW)
+![商品列表](healthManager/goods.jpg)
 ![商品详情](https://github.com/plzspara/image/raw/master/healthManager/goodsDe.jpg?token=AIBNGWIB53R2CWRJUPYFTMC46XHYE)
 ![购物车](https://github.com/plzspara/image/raw/master/healthManager/shopCar.jpg?token=AIBNGWLKQLW6YONC6DQ2VTS46XIHG)
 
