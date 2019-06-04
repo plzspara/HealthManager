@@ -131,6 +131,7 @@ public class FourthFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 byte[] Picture_bt = response.body().bytes();
+                Log.d(TAG, "onResponse: " + Picture_bt);
                 //通过handler更新UI
                 Message message = handler.obtainMessage();
                 message.obj = Picture_bt;

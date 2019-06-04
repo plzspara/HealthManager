@@ -79,8 +79,8 @@ public class HealthReportActivity extends AppCompatActivity {
 
         DecimalFormat df = new DecimalFormat("0.00");
         show_step.setText("步数："+stepCount);
-        show_length.setText("距离：" + df.format(stepCount * 0.6 / 1000) + "公里");
-        show_cal.setText("热量：" + df.format(stepCount * 0.6 * 0.02) + "千卡");
+        show_length.setText("距离：" + df.format(stepCount * 0.75 / 1000) + "公里");
+        show_cal.setText("热量：" + df.format(stepCount * 0.056) + "千卡");
         show_weight.setText("体重：" + weight + "kg");
     }
 }
