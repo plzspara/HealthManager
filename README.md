@@ -1,12 +1,33 @@
 # 健康管家
 
 ## 功能模块
-
 ### 本应用主要设计和实现了四个功能模块：
 - 用户信息管理模块：个人信息的填写和维护，运动历史查看，运动计划制定等服务，用户登录注册。
 - 健康管理模块：对用户进行运动管理和体重管理，综合多种数据生成身体健康报告。
 - 健康资讯模块：推送体育、运动和饮食等与健康相关的文章及新闻。
 - 健康商城模块：展示，推荐和售卖与健康管理相关的商品，并实现了购物车功能。
+
+## 功能实现
+### 用户模块
+https://github.com/plzspara/image/raw/master/healthManager/login.jpg
+https://github.com/plzspara/image/raw/master/healthManager/register.jpg
+https://github.com/plzspara/image/raw/master/healthManager/personal.jpg
+https://github.com/plzspara/image/raw/master/healthManager/week_sportHis.jpg
+https://github.com/plzspara/image/raw/master/healthManager/month_sportHis.jpg
+https://github.com/plzspara/image/raw/master/healthManager/healthReport.jpg
+
+### 健康管理模块
+https://github.com/plzspara/image/raw/master/healthManager/run.jpg
+https://github.com/plzspara/image/raw/master/healthManager/weight.jpg
+
+### 体育新闻模块
+https://github.com/plzspara/image/raw/master/healthManager/newsList.jpg
+https://github.com/plzspara/image/raw/master/healthManager/news.jpg
+
+### 商城模块
+https://github.com/plzspara/image/raw/master/healthManager/goods.jpg
+https://github.com/plzspara/image/raw/master/healthManager/goodsDe.jpg
+https://github.com/plzspara/image/raw/master/healthManager/shopCar.jpg
 
 
 ## 关键技术
