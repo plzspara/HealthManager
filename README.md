@@ -11,6 +11,7 @@
 
 ## 功能实现
 ### 用户模块
+![test](https://italker-plz.oss-cn-hongkong.aliyuncs.com/android.png)
 ![登录](https://raw.githubusercontent.com/plzspara/image/master/healthManager/login.jpg)
 ![注册](https://raw.githubusercontent.com/plzspara/image/master/healthManager/register.jpg)
 ![个人](https://raw.githubusercontent.com/plzspara/image/master/healthManager/personal.jpg)
