@@ -21,7 +21,6 @@
 ![运动报告](https://raw.githubusercontent.com/plzspara/image/master/healthManager/healthReport.jpg)
 
 ### 健康管理模块
-![运动](https://raw.githubusercontent.com/plzspara/image/master/healthManager/main.jpg)
 ![运动](https://raw.githubusercontent.com/plzspara/image/master/healthManager/run.jpg)
 ![体重管理](https://raw.githubusercontent.com/plzspara/image/master/healthManager/weight.jpg)
 
